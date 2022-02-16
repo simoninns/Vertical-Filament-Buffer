@@ -29,13 +29,12 @@ use <BOSL/shapes.scad>
 module bearing_holder()
 {
     difference() {
-        cyl(h=6, d=4);
-        cyl(h=8, d=3);
+        cyl(h=10, d=4.75);
+        cyl(h=12, d=3.25);
     }
 }
 
 module render_bearing_holder(crend, toPrint)
 {
-    if (toPrint) move([0,0,3]) bearing_holder();
-    else  bearing_holder();
+    bearing_holder();
 }

@@ -35,48 +35,49 @@ module spool()
                 difference() {
                     union() {
                         // Top and bottom lip
-                        move([0,0,-0.9]) cyl(h=0.2,d=70, center=true, $fn=100);
-                        move([0,0,3-0.1]) cyl(h=0.2,d=70, center=true, $fn=100);
+                        move([0,0,-2.5]) cyl(h=0.5,d=70, center=true, $fn=100);
+                        move([0,0,3.5]) cyl(h=0.5,d=70, center=true, $fn=100);
 
                         // Top and bottom slopes
-                        move([0,0,0.1]) cyl(h=1.8,d1=70, d2=65, center=true, $fn=100);
-                        move([0,0,1.9]) cyl(h=1.8,d1=65, d2=70, center=true, $fn=100);
+                        move([0,0,-1.25]) cyl(h=2,d1=70, d2=65, center=true, $fn=100);
+                        move([0,0,2.25]) cyl(h=2,d1=65, d2=70, center=true, $fn=100);
 
                         // Middle fill
-                        move([0,0,1]) cyl(h=2,d=67, center=true, $fn=100);
+                        move([0,0,0.5]) cyl(h=6,d=67, center=true, $fn=100);
                     }
 
                     // Remove the middle
-                    move([0,0,1]) cyl(h=8, d=64, center=true, $fn=100);
+                    move([0,0,0]) cyl(h=10, d=64, center=true, $fn=100);
                 }
             }
 
             // Middle support
-            move([0,0,-1.5]) {
+            move([0,0,-2.5]) {
                 difference() {
-                    cyl(h=1,d=40, center=true, $fn=100);
-                    cyl(h=2,d=36, center=true, $fn=100);
+                    cyl(h=2,d=40, center=true, $fn=100);
+                    cyl(h=3,d=36, center=true, $fn=100);
                 }
             }
 
             // Spokes
-            move([0,0,-1.5]) {
-                zrot(000) cuboid([67,2,1]);
-                zrot(045) cuboid([67,2,1]);
-                zrot(090) cuboid([67,2,1]);
-                zrot(135) cuboid([67,2,1]);
+            move([0,0,-2.5]) {
+                zrot(000) cuboid([66,2,2]);
+                zrot(045) cuboid([66,2,2]);
+                zrot(090) cuboid([66,2,2]);
+                zrot(135) cuboid([66,2,2]);
             }
 
             // Bearing holder
-            cyl(h=4, d=14);
+            move([0,0,-0.5]) cyl(h=6, d=16);
         }
 
         // Bearing slot
-        cyl(h=6, d=12);
+        move([0,0,1.5]) cyl(h=8, d=14.25);
+        move([0,0,0]) cyl(h=8, d=11);
     }
 }
 
 module render_spool(crend, toPrint)
 {
-    spool();
+    move([0,0,0.5]) spool();
 }

@@ -30,36 +30,36 @@ use <BOSL/metric_screws.scad>
 
 module spool_holder_base()
 {
-    move([0,0,-2.75]) {
+    move([0,0,-4.5]) {
         difference() {
             union() {
                 difference() {
-                    cuboid([70 + 2,74,0.5]);
+                    cuboid([70 + 4,74,1]);
                     move([0,0,0]) cyl(h=2,d=66, center=true, $fn=100);
                 }
 
                 // Spokes
-                cyl(h=0.5,d=14, center=true, $fn=100);
+                cyl(h=1,d=14, center=true, $fn=100);
                 move([0,0,0]) {
-                    //zrot(000) cuboid([68,2,0.5]);
-                    zrot(045) cuboid([68,3,0.5]);
-                    zrot(090) cuboid([68,3,0.5]);
-                    zrot(135) cuboid([68,3,0.5]);
+                    //zrot(000) cuboid([68,2,1]);
+                    zrot(045) cuboid([68,3,1]);
+                    zrot(090) cuboid([68,3,1]);
+                    zrot(135) cuboid([68,3,1]);
                 }
 
-                move([0,0,0.5]) cyl(h=0.5, d1=8, d2=6);
+                move([0,0,1.5]) cyl(h=2, d1=12, d2=6);
             }
 
-            move([0,0,1]) cyl(h=10,d=4.2);
+            move([0,0,1]) cyl(h=10,d=5);
             
             // Connector clearance
-            move([34,33 + 2,2.75]) ycyl(h=10,d=12.75);
-            move([-34,33 + 2,2.75]) ycyl(h=10,d=12.75);
+            move([34,33 + 2,4.5]) ycyl(h=10,d=12.75);
+            move([-34,33 + 2,4.5]) ycyl(h=10,d=12.75);
         }
     }
 
     // Nut holder
-    difference() {
+    move([0,0,-2]) difference() {
         move([0,0,-4]) cyl(h=2, d1=8, d2=12, $fn=6);
         move([0,0,-5.25]) metric_nut(size=3.25, hole=false);
     }
@@ -67,31 +67,31 @@ module spool_holder_base()
 
 module spool_holder_top()
 {
-    move([0,0,2.75]) {
+    move([0,0,4.5]) {
         difference() {
             union() {
                 difference() {
-                    cuboid([70 + 2,74,0.5]);
+                    cuboid([70 + 4,74,1]);
                     move([0,0,0]) cyl(h=2,d=66, center=true, $fn=100);
                 }
 
                 // Spokes
-                cyl(h=0.5,d=14, center=true, $fn=100);
+                cyl(h=1,d=14, center=true, $fn=100);
                 move([0,0,0]) {
-                    //zrot(000) cuboid([68,2,0.5]);
-                    zrot(045) cuboid([68,3,0.5]);
-                    zrot(090) cuboid([68,3,0.5]);
-                    zrot(135) cuboid([68,3,0.5]);
+                    //zrot(000) cuboid([68,2,1]);
+                    zrot(045) cuboid([68,3,1]);
+                    zrot(090) cuboid([68,3,1]);
+                    zrot(135) cuboid([68,3,1]);
                 }
 
-                move([0,0,-0.5]) cyl(h=0.5, d1=6, d2=8);
+                move([0,0,-1]) cyl(h=1, d1=6, d2=12);
             }
 
-            move([0,0,-2]) cyl(h=6,d=4.2);
+            move([0,0,-2]) cyl(h=6,d=5);
             
             // Connector clearance
-            move([34,33 + 2,-2.75]) ycyl(h=10,d=12.75);
-            move([-34,33 + 2,-2.75]) ycyl(h=10,d=12.75);
+            move([34,33 + 2,-4.55]) ycyl(h=10,d=12.75);
+            move([-34,33 + 2,-4.5]) ycyl(h=10,d=12.75);
         }
     }
 }
@@ -101,18 +101,18 @@ module spool_holder_sides()
     difference() {
         union() {
             // Left
-            move([(72/2 - 0.25),0,0]) {
-                cuboid([0.5,74,5.5]);
+            move([(72/2 + 0.5),0,0]) {
+                cuboid([1,74,8]);
             }
 
             // Right
-            move([(-72/2 + 0.25),0,0]) {
-                cuboid([0.5,74,5.5]);
+            move([(-72/2 +-0.5),0,0]) {
+                cuboid([1,74,8]);
             }
 
             // Top
-            move([0,(75/2) - 0.75,0]) {
-                cuboid([72,0.5,5.5]);
+            move([0,(75/2) - 1,0]) {
+                cuboid([72,1,8]);
             }
         }
 
@@ -124,8 +124,8 @@ module spool_holder_sides()
 
 module spool_holder_hardware()
 {
-    move([0,0,3]) metric_bolt(headtype="round", size=3, l=8, details=false, pitch=0, phillips="#2");
-    move([0,0,-5.25]) metric_nut(size=3, hole=true);
+    move([0,0,5]) metric_bolt(headtype="round", size=3, l=12, details=false, pitch=0, phillips="#2");
+    move([0,0,-7.5]) metric_nut(size=3, hole=true);
 }
 
 module spool_holder_connectors()
@@ -133,7 +133,7 @@ module spool_holder_connectors()
     move([34,33,0]) {
         difference() {
             ycyl(h=8,d=13);
-            move([0,2,0]) xrot(90) threaded_rod(d=10, l=8, pitch=1, internal=true);
+            move([0,2,0]) xrot(90) threaded_rod(d=10, l=8, pitch=0.9, internal=true);
             move([0,-3,0]) ycyl(h=20,d=2.5);
         }
     }
@@ -141,7 +141,7 @@ module spool_holder_connectors()
     move([-34,33,0]) {
         difference() {
             ycyl(h=8,d=13);
-            move([0,2,0]) xrot(90) threaded_rod(d=10, l=8, pitch=1, internal=true);
+            move([0,2,0]) xrot(90) threaded_rod(d=10, l=8, pitch=0.9, internal=true);
             move([0,-3,0]) ycyl(h=20,d=2.5);
         }
     }
@@ -154,4 +154,15 @@ module render_spool_holder(crend, toPrint)
     spool_holder_sides();
     spool_holder_connectors();
     //spool_holder_hardware();
+}
+
+module render_spool_holder_support(crend, toPrint)
+{
+    move([34,34.5]) {
+        ycyl(h=5,d=5);
+    }
+
+    move([-34,34.5,0]) {
+        ycyl(h=5,d=5);
+    }
 }

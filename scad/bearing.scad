@@ -48,7 +48,29 @@ module bearing604zz()
     }
 }
 
+// Bearing type: 605zz (id=5mm x od=14mm x h=5mm) 
+module bearing605zz()
+{
+    // Outer ring
+    difference() {
+        color([0.6,0.6,0.6]) cyl(h=5, d=14);
+        cyl(h=6, d=12);
+    }
+
+    // Inner ring
+    difference() {
+        color([0.6,0.6,0.6]) cyl(h=5, d=7);
+        cyl(h=6, d=5);
+    }
+
+    // Body
+    difference() {
+        color([0.8,0.8,0.8]) cyl(h=4, d=12);
+        cyl(h=6, d=7);
+    }
+}
+
 module render_bearing(crend, toPrint)
 {
-    bearing604zz();
+    move([0,0,0.5]) bearing605zz();
 }

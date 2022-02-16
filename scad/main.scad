@@ -49,6 +49,7 @@ use_colour = "Colour"; // [Colour, No colour]
 for_printing = "Display"; // [Display, Printing]
 
 display_spool_holder = "No"; // [Yes, No]
+display_spool_holder_support = "No"; // [Yes, No]
 display_spool = "No"; // [Yes, No]
 display_bearing_holder = "No"; // [Yes, No]
 display_bearing = "No"; // [Yes, No]
@@ -63,6 +64,7 @@ module main()
 
     // Display selections
     d_spool_holder = (display_spool_holder == "Yes") ? true:false;
+    d_spool_holder_support = (display_spool_holder_support == "Yes") ? true:false;
     d_spool = (display_spool == "Yes") ? true:false;
     d_bearing_holder = (display_bearing_holder == "Yes") ? true:false;
     d_bearing = (display_bearing == "Yes") ? true:false;
@@ -70,6 +72,7 @@ module main()
 
     // Render the required parts
     if (d_spool_holder) render_spool_holder(crend, toPrint);
+    if (d_spool_holder_support) render_spool_holder_support(crend, toPrint);
     if (d_spool) render_spool(crend, toPrint);
     if (d_bearing_holder) render_bearing_holder(crend, toPrint);
     if (d_bearing) render_bearing(crend, toPrint);
