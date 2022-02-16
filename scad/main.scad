@@ -44,24 +44,24 @@ use_colour = "Colour"; // [Colour, No colour]
 for_printing = "Display"; // [Display, Printing]
 feed_configuration = "Above"; // [Above, Below]
 
-display_body_top = "Yes"; // [Yes, No]
-display_body_middle = "Yes"; // [Yes, No]
-display_body_base = "Yes"; // [Yes, No]
-display_desiccant_compartment_lid = "Yes"; // [Yes, No]
+display_body_top = "No"; // [Yes, No]
+display_body_middle = "No"; // [Yes, No]
+display_body_base = "No"; // [Yes, No]
+display_desiccant_compartment_lid = "No"; // [Yes, No]
 
-display_hinge = "Yes"; // [Yes, No]
-display_hinge_caps = "Yes"; // [Yes, No]
+display_hinge = "No"; // [Yes, No]
+display_hinge_caps = "No"; // [Yes, No]
 
-display_mounting_bracket_upper = "Yes"; // [Yes, No]
-display_mounting_bracket_lower = "Yes"; // [Yes, No]
-display_t_nuts = "Yes"; // [Yes, No]
+display_mounting_bracket_upper = "No"; // [Yes, No]
+display_mounting_bracket_lower = "No"; // [Yes, No]
+display_t_nuts = "No"; // [Yes, No]
 
-display_spools = "Yes"; // [Yes, No]
-display_bearings = "Yes"; // [Yes, No]
-display_connectors = "Yes"; // [Yes, No]
+display_spools = "No"; // [Yes, No]
+display_bearings = "No"; // [Yes, No]
+display_connectors = "No"; // [Yes, No]
 
-display_desiccant_holder = "Yes"; // [Yes, No]
-display_desiccant_holder_lid = "Yes"; // [Yes, No]
+display_desiccant_holder = "No"; // [Yes, No]
+display_desiccant_holder_lid = "No"; // [Yes, No]
 
 // Render the required items
 module main()
