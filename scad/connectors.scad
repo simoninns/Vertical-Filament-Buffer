@@ -56,11 +56,11 @@ module pc4_m10_connector()
 
 module render_connectors(crend, toPrint)
 {
-    move([+((67/2) + (1.75 / 4)),32,0]) {
+    move([+((67/2) + (1.75 / 4)),37,0]) {
         xrot(-90) pc4_m10_connector();
     }
 
-    move([-((67/2) + (1.75 / 4)),32,0]) {
+    move([-((67/2) + (1.75 / 4)),37,0]) {
         xrot(-90) pc4_m10_connector();
     }
 }

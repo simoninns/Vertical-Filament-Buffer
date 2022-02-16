@@ -31,6 +31,8 @@ include <bearing.scad>
 include <spool.scad>
 include <connectors.scad>
 include <spool_holder.scad>
+include <bearing_holder.scad>
+
 // include <body_top.scad>
 // include <body_middle.scad>
 // include <body_base.scad>
@@ -48,6 +50,7 @@ for_printing = "Display"; // [Display, Printing]
 
 display_spool_holder = "No"; // [Yes, No]
 display_spool = "No"; // [Yes, No]
+display_bearing_holder = "No"; // [Yes, No]
 display_bearing = "No"; // [Yes, No]
 display_connectors = "No"; // [Yes, No]
 
@@ -61,12 +64,14 @@ module main()
     // Display selections
     d_spool_holder = (display_spool_holder == "Yes") ? true:false;
     d_spool = (display_spool == "Yes") ? true:false;
+    d_bearing_holder = (display_bearing_holder == "Yes") ? true:false;
     d_bearing = (display_bearing == "Yes") ? true:false;
     d_connectors = (display_connectors == "Yes") ? true:false;
 
     // Render the required parts
     if (d_spool_holder) render_spool_holder(crend, toPrint);
     if (d_spool) render_spool(crend, toPrint);
+    if (d_bearing_holder) render_bearing_holder(crend, toPrint);
     if (d_bearing) render_bearing(crend, toPrint);
     if (d_connectors) render_connectors(crend, toPrint);
 }
