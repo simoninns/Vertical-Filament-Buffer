@@ -94,6 +94,14 @@ module spool_holder_top()
             move([-34,33 + 2,-4.5]) ycyl(h=10,d=12.75);
         }
     }
+
+    // Screw holder
+    move([0,0,6]) difference() {
+        move([0,0,0]) cyl(h=2, d1=12, d2=8, $fn=6);
+        move([0,0,0]) cyl(h=4, d=6);
+    }
+
+    
 }
 
 module spool_holder_sides()
@@ -112,7 +120,7 @@ module spool_holder_sides()
 
             // Top
             move([0,(75/2) - 1,0]) {
-                cuboid([72,1,8]);
+                cuboid([72,1,8 + 2 + 4], chamfer=1, edges=EDGES_Y_ALL);
             }
         }
 
@@ -133,7 +141,7 @@ module spool_holder_connectors()
     move([34,33,0]) {
         difference() {
             ycyl(h=8,d=13);
-            move([0,2,0]) xrot(90) threaded_rod(d=10, l=8, pitch=0.9, internal=true);
+            move([0,2,0]) xrot(90) threaded_rod(d=9.5, l=8, pitch=0.9, internal=true);
             move([0,-3,0]) ycyl(h=20,d=2.5);
         }
     }
@@ -141,9 +149,30 @@ module spool_holder_connectors()
     move([-34,33,0]) {
         difference() {
             ycyl(h=8,d=13);
-            move([0,2,0]) xrot(90) threaded_rod(d=10, l=8, pitch=0.9, internal=true);
+            move([0,2,0]) xrot(90) threaded_rod(d=9.5, l=8, pitch=0.9, internal=true);
             move([0,-3,0]) ycyl(h=20,d=2.5);
         }
+    }
+}
+
+module spool_holder_guides()
+{
+    difference() {
+        union() {
+            // Left
+            move([(72/2 + 1.5),0,0]) {
+                cuboid([3,74,3], chamfer=1);
+            }
+
+            // Right
+            move([(-72/2 - 1.5),0,0]) {
+                cuboid([3,74,3], chamfer=1);
+            }
+        }
+
+        // Connector clearance
+        move([34,33 + 2,0]) ycyl(h=10,d=12.75);
+        move([-34,33 + 2,0]) ycyl(h=10,d=12.75);
     }
 }
 
@@ -152,6 +181,7 @@ module render_spool_holder(crend, toPrint)
     spool_holder_base();
     spool_holder_top();
     spool_holder_sides();
+    spool_holder_guides();
     spool_holder_connectors();
     //spool_holder_hardware();
 }

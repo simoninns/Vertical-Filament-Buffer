@@ -31,7 +31,7 @@ module spool()
     difference() {
         union() {
             // Outer edge
-            move([0,0,-1]) {
+            move([0,0,-0.75]) {
                 difference() {
                     union() {
                         // Top and bottom lip
@@ -72,7 +72,7 @@ module spool()
         }
 
         // Bearing slot
-        move([0,0,1.5]) cyl(h=8, d=14.25);
+        move([0,0,1.5]) cyl(h=8, d=14.125);
         move([0,0,0]) cyl(h=8, d=11);
     }
 }
