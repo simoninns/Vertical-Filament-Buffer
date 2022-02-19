@@ -79,5 +79,15 @@ module spool()
 
 module render_spool(crend, toPrint)
 {
-    move([0,0,0.5]) spool();
+    if (toPrint) {
+        move([0,0,3.5]) spool();
+    } else {
+        move([0,0,0.5]) {
+            move([0,0,+32]) spool();
+            move([0,0,+16]) spool();
+            move([0,0,  0]) spool();
+            move([0,0,-16]) spool();
+            move([0,0,-32]) spool();
+        }
+    }
 }

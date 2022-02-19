@@ -72,5 +72,13 @@ module bearing605zz()
 
 module render_bearing(crend, toPrint)
 {
-    move([0,0,0.5]) bearing605zz();
+    if (!toPrint) {
+        move([0,0,0.5]) {
+            move([0,0,+30]) bearing605zz();
+            move([0,0,+15]) bearing605zz();
+            move([0,0,  0]) bearing605zz();
+            move([0,0,-15]) bearing605zz();
+            move([0,0,-30]) bearing605zz();
+        }
+    }
 }

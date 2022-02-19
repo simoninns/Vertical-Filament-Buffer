@@ -54,7 +54,7 @@ module pc4_m10_connector()
     move([0,0,25]) color([0.9,0.9,0.9]) cyl(h=30, d=4);
 }
 
-module render_connectors(crend, toPrint)
+module connectors()
 {
     move([+((67/2) + (1.75 / 4)),37,0]) {
         xrot(-90) pc4_m10_connector();
@@ -65,42 +65,13 @@ module render_connectors(crend, toPrint)
     }
 }
 
-// module contact_mount_inverse(toPrint)
-// {
-//     ren_pitch = 0.9;
-//     ren_det = 30;
-
-//     // Threads for connectors
-//     move([0,0,1.5 + 2]) {
-//         // Thread are slow to render, so replace if just displaying
-//         if (!toPrint) {
-//             move([-29,0,0]) cyl(h=8,d=10);
-//             move([-14.5,0,0]) cyl(h=8,d=10);
-//             move([  0,0,0]) cyl(h=8,d=10);
-//             move([+14.5,0,0]) cyl(h=8,d=10);
-//             move([+29,0,0]) cyl(h=8,d=10);
-//         } else {
-//             move([-29,0,0]) threaded_rod(d=10, l=8, pitch=ren_pitch, internal=true, $fn=ren_det);
-//             move([-14.5,0,0]) threaded_rod(d=10, l=8, pitch=ren_pitch, internal=true, $fn=ren_det);
-//             move([  0,0,0]) threaded_rod(d=10, l=8, pitch=ren_pitch, internal=true, $fn=ren_det);
-//             move([+14.5,0,0]) threaded_rod(d=10, l=8, pitch=ren_pitch, internal=true, $fn=ren_det);
-//             move([+29,0,0]) threaded_rod(d=10, l=8, pitch=ren_pitch, internal=true, $fn=ren_det);
-//         }
-//     }
-
-//     // Pipe holes
-//     move([-29,0,0]) cyl(h=14, d=4.5);
-//     move([-14.5,0,0]) cyl(h=14, d=4.5);
-//     move([  0,0,0]) cyl(h=14, d=4.5);
-//     move([+14.5,0,0]) cyl(h=14, d=4.5);
-//     move([+29,0,0]) cyl(h=14, d=4.5);
-
-//     // Fillament holes
-//     move([0,0,-14]) {
-//         move([-29,0,0]) cyl(h=16, d=2.5);
-//         move([-14.5,0,0]) cyl(h=16, d=2.5);
-//         move([  0,0,0]) cyl(h=16, d=2.5);
-//         move([+14.5,0,0]) cyl(h=16, d=2.5);
-//         move([+29,0,0]) cyl(h=16, d=2.5);
-//     }
-// }
+module render_connectors(crend, toPrint)
+{
+    if (!toPrint) {
+        move([0,0,+32]) connectors();
+        move([0,0,+16]) connectors();
+        move([0,0,  0]) connectors();
+        move([0,0,-16]) connectors();
+        move([0,0,-32]) connectors();
+    }
+}
