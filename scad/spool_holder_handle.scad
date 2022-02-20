@@ -33,9 +33,10 @@ module spool_holder_handle()
             union() {
                 move([0,2,0]) {
                     hull() {
-                        move([0,-1,0])cuboid([43.5,4,3.5], chamfer=0.5);
-                        move([0,1,-0.25]) cyl(h=3.5,d1=19.5, d2=20);
-                        move([0,1,0.25]) cyl(h=3.5,d1=20, d2=19.5);
+                        move([0,-1,0]) cuboid([43.5,4,3.5], chamfer=0.5);
+
+                        move([0, 1,-1.5]) cyl(h=0.5,d1=19.5, d2=20, $fn=60);
+                        move([0, 1,1.5]) cyl(h=0.5,d1=20, d2=19.5, $fn=60);
                     }
                 }
             }
@@ -52,7 +53,7 @@ module spool_holder_handle()
 module render_spool_holder_handle(crend, toPrint)
 {
     if (toPrint) {
-        move([0,-40,1.5]) spool_holder_handle();
+        move([0,-40,1.75]) spool_holder_handle();
     } else {
         move([0,-1,0]) {
             move([0,0,+32]) spool_holder_handle();
