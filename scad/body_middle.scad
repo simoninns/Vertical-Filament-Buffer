@@ -91,8 +91,6 @@ module body_middle()
             move([0,0,-3.5]) {
                 move([0,42,0]) scale(1.01) body_clip();
                 move([0,-42,0]) zrot(180) scale(1.01) body_clip();
-                move([41,0,0]) zrot(-90) scale(1.01) body_clip();
-                move([-41,0,0]) zrot(90) scale(1.01) body_clip();
             }
         }
     }
@@ -109,8 +107,6 @@ module body_middle()
         move([0,0,-1.5]) {
             move([0,42,0]) body_clip();
             move([0,-42,0]) zrot(180) body_clip();
-            move([41,0,0]) zrot(-90) body_clip();
-            move([-41,0,0]) zrot(90) body_clip();
         }
     }
 
@@ -124,7 +120,7 @@ module body_middle()
 
             // Nut recess
             move([0,1,0]) ycyl(h=8, d=3.25);
-            move([0,1,0]) ycyl(h=4, d=6.2, $fn=6);
+            move([0,1,0]) yrot(90) ycyl(h=4, d=6.25, $fn=6);
         }
     }
 
@@ -137,7 +133,7 @@ module body_middle()
 
             // Nut recess
             move([0,1,0]) ycyl(h=8, d=3.25);
-            move([0,1,0]) ycyl(h=4, d=6.2, $fn=6);
+            move([0,1,0]) yrot(90) ycyl(h=4, d=6.25, $fn=6);
         }
     }
 }
