@@ -31,24 +31,41 @@ include <body_middle.scad>
 module holder_slot()
 {
     // Connector clearance
-    move([34,33,0]) ycyl(h=8.5,d=13.25);
-    move([-34,33,0]) ycyl(h=8.5,d=13.25);
+    move([34,33,0]) {
+        ycyl(h=8,d=13.5);
+        //move([0,-10,0]) ycyl(h=20,d=4.75);
+    }
 
-    // Main body
-    move([0,0,0]) cuboid([74.25,74.25,10]);
+    move([-34,33,0]) {
+        ycyl(h=8,d=13.5);
+        //move([0,-10,0]) ycyl(h=20,d=4.75);
+    }
 
-    // Spindle supports
+    // Left
+    hull() {
+        move([(72/2 + 0.5),3,0]) {
+            cuboid([1,72,12]);
+        }
+
+        // Right
+        move([(-72/2 +-0.5),3,0]) {
+            cuboid([1,72,12]);
+        }
+    }
+
+    // // Spindle supports
     move([0,0,0]) cuboid([20,74.25,15]);
 
     // Guides
+
     // Left
-    move([(72/2 + 1.5),0,0]) {
-        cuboid([3.25,76,3.25], chamfer=1);
+    move([(72/2 + 1.5),24,0]) {
+        cuboid([3.5,20,3.5], chamfer=1);
     }
 
     // Right
-    move([(-72/2 - 1.5),0,0]) {
-        cuboid([3.25,76,3.25], chamfer=1);
+    move([(-72/2 - 1.5),24,0]) {
+        cuboid([3.5,20,3.5], chamfer=1);
     }
 }
 
@@ -74,8 +91,6 @@ module body_top()
         move([0,13.5,0]) yrot(90) xrot(-90) {
             move([0,42,0]) scale(1.01) body_clip();
             move([0,-42,0]) zrot(180) scale(1.01) body_clip();
-            move([41,0,0]) zrot(-90) scale(1.01) body_clip();
-            move([-41,0,0]) zrot(90) scale(1.01) body_clip();
         }
 
         // Clip mounting peg recesses
