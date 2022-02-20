@@ -30,39 +30,45 @@ use <BOSL/metric_screws.scad>
 
 module spool_holder_base()
 {
-    move([0,0,-4.5]) {
-        difference() {
-            union() {
-                difference() {
-                    move([0,0,-0.25]) cuboid([70 + 4,74,1.5]);
-                    
-                    // Cut hexagon pattern
-                    move([-2,-2,0]) for (ypos=[0: 20: 20*3]) {
-                        for (xpos=[0: 12: 12*5]) {
-                            move([xpos - 28,ypos - 28,0]) zrot(90) cyl(h=3, d=12, $fn=6);
-                        }
+    difference() {
+        move([0,0,-4.5]) {
+            difference() {
+                union() {
+                    difference() {
+                        move([0,0,-0.25]) cuboid([70 + 4,74,1.5]);
+                        
+                        // Cut hexagon pattern
+                        move([-2,-2,0]) for (ypos=[0: 20: 20*3]) {
+                            for (xpos=[0: 12: 12*5]) {
+                                move([xpos - 28,ypos - 28,0]) zrot(90) cyl(h=3, d=12, $fn=6);
+                            }
 
-                        for (xpos=[0: 12: 12*6]) {
-                            move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=3, d=12, $fn=6);
+                            for (xpos=[0: 12: 12*6]) {
+                                move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=3, d=12, $fn=6);
+                            }
                         }
                     }
+
+                    // Fill centre
+                    move([0,0,0]) zrot(90) cyl(h=1, d=12, $fn=6);
+
+                    // Bearing washer to keep in place
+                    move([0,0,1.5]) cyl(h=2, d1=12, d2=6);
                 }
 
-                // Fill centre
-                move([0,0,0]) zrot(90) cyl(h=1, d=12, $fn=6);
-
-                // Bearing washer to keep in place
-                move([0,0,1.5]) cyl(h=2, d1=12, d2=6);
+                // Hub hole
+                move([0,0,1]) cyl(h=10,d=5);
             }
-
-            // Hub hole
-            move([0,0,1]) cyl(h=10,d=5);
-            
-            // Connector clearance
-            move([34,33 + 2,4.5]) ycyl(h=10,d=12.75);
-            move([-34,33 + 2,4.5]) ycyl(h=10,d=12.75);
         }
+        
+        // Connector clearance
+        move([34,33 + 2,0]) ycyl(h=14,d=12.75);
+        move([34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
+
+        move([-34,33 + 2.99,0]) ycyl(h=14,d=12.75);
+        move([-34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
     }
+
 
     // Nut holder
     move([0,0,-2]) difference() {
@@ -73,38 +79,43 @@ module spool_holder_base()
 
 module spool_holder_top()
 {
-    move([0,0,4.5]) {
-        difference() {
-            union() {
-                difference() {
-                    move([0,0,0.25]) cuboid([70 + 4,74,1.5]);
+    difference() {
+        move([0,0,4.5]) {
+            difference() {
+                union() {
+                    difference() {
+                        move([0,0,0.25]) cuboid([70 + 4,74,1.5]);
 
-                    // Cut hexagon pattern
-                    move([-2,-2,0]) for (ypos=[0: 20: 20*3]) {
-                        for (xpos=[0: 12: 12*5]) {
-                            move([xpos - 28,ypos - 28,0]) zrot(90) cyl(h=3, d=12, $fn=6);
-                        }
+                        // Cut hexagon pattern
+                        move([-2,-2,0]) for (ypos=[0: 20: 20*3]) {
+                            for (xpos=[0: 12: 12*5]) {
+                                move([xpos - 28,ypos - 28,0]) zrot(90) cyl(h=3, d=12, $fn=6);
+                            }
 
-                        for (xpos=[0: 12: 12*6]) {
-                            move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=3, d=12, $fn=6);
+                            for (xpos=[0: 12: 12*6]) {
+                                move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=3, d=12, $fn=6);
+                            }
                         }
                     }
+
+                    // Fill centre
+                    move([0,0,0]) zrot(90) cyl(h=1, d=12, $fn=6);
+
+                    // Bearing washer to keep in place
+                    move([0,0,-1]) cyl(h=1, d1=6, d2=12);
                 }
 
-                // Fill centre
-                move([0,0,0]) zrot(90) cyl(h=1, d=12, $fn=6);
-
-                // Bearing washer to keep in place
-                move([0,0,-1]) cyl(h=1, d1=6, d2=12);
+                // Hub hole
+                move([0,0,-2]) cyl(h=6,d=5);   
             }
-
-            // Hub hole
-            move([0,0,-2]) cyl(h=6,d=5);
-            
-            // Connector clearance
-            move([34,33 + 2,-4.55]) ycyl(h=10,d=12.75);
-            move([-34,33 + 2,-4.5]) ycyl(h=10,d=12.75);
         }
+            
+        // Connector clearance
+        move([34,33 + 2,0]) ycyl(h=14,d=12.75);
+        move([34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
+
+        move([-34,33 + 2.99,0]) ycyl(h=14,d=12.75);
+        move([-34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
     }
 
     // Screw holder
@@ -144,8 +155,11 @@ module spool_holder_sides()
         }
 
         // Connector clearance
-        move([34,33 + 2,0]) ycyl(h=10,d=12.75);
-        move([-34,33 + 2,0]) ycyl(h=10,d=12.75);
+        move([34,33 + 2,0]) ycyl(h=14,d=12.75);
+        move([34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
+
+        move([-34,33 + 2,0]) ycyl(h=14,d=12.75);
+        move([-34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
 
         move([34,23.51,0]) ycyl(h=13,d=5.25);
         move([-34,23.51,0]) ycyl(h=13,d=5.25);
@@ -160,33 +174,56 @@ module spool_holder_hardware()
 
 module spool_holder_connectors(toPrint)
 {
+    // Right
     move([34,33,0]) {
         difference() {
             ycyl(h=8,d=13);
-            if (toPrint) move([0,2,0]) xrot(90) threaded_rod(d=9.5, l=8, pitch=0.9, internal=true);
-            else move([0,2,0]) xrot(90) cyl(h=8, d=9.5);
+            if (toPrint) {
+                move([0,2,0]) xrot(90) threaded_rod(d=9.5, l=8, pitch=0.9, internal=true);
+                move([0,-3.49,0]) xrot(90) cyl(h=3, d=10);
+            } else {
+                move([0,2,0]) xrot(90) cyl(h=8, d=9.5);
+                move([0,-3.49,0]) xrot(90) cyl(h=3, d=10);
+            }
+
             move([0,-3,0]) ycyl(h=20,d=4.25);
         }
 
         difference() {
-            move([0,-10,0]) ycyl(h=12,d=5.25);
+            union() {
+                move([0,-10,0]) ycyl(h=12,d=5.25);
+                move([0,-6,0]) ycyl(h=4,d2=13, d1=5.25);
+            }
+            move([0,-5.99,0]) ycyl(h=4,d2=13 - 3, d1=5.25 - 2.5);
             move([0,-9,0]) ycyl(h=11,d=4.25);
-            move([0,-10,0]) ycyl(h=14,d=2);
+            move([0,-10,0]) ycyl(h=14,d=2.5);
         }
     }
 
+
+    // Left
     move([-34,33,0]) {
         difference() {
             ycyl(h=8,d=13);
-            if (toPrint) move([0,2,0]) xrot(90) threaded_rod(d=9.5, l=8, pitch=0.9, internal=true);
-            else move([0,2,0]) xrot(90) cyl(h=8, d=9.5);
+            if (toPrint) {
+                move([0,2,0]) xrot(90) threaded_rod(d=9.5, l=8, pitch=0.9, internal=true);
+                move([0,-3.49,0]) xrot(90) cyl(h=3, d=10);
+            } else {
+                move([0,2,0]) xrot(90) cyl(h=8, d=9.5);
+                move([0,-3.49,0]) xrot(90) cyl(h=3, d=10);
+            }
+
             move([0,-3,0]) ycyl(h=20,d=4.25);
         }
 
         difference() {
-            move([0,-10,0]) ycyl(h=12,d=5.25);
+            union() {
+                move([0,-10,0]) ycyl(h=12,d=5.25);
+                move([0,-6,0]) ycyl(h=4,d2=13, d1=5.25);
+            }
+            move([0,-5.99,0]) ycyl(h=4,d2=13 - 3, d1=5.25 - 2.5);
             move([0,-9,0]) ycyl(h=11,d=4.25);
-            move([0,-10,0]) ycyl(h=14,d=2);
+            move([0,-10,0]) ycyl(h=14,d=2.5);
         }
     }
 }

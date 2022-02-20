@@ -33,13 +33,23 @@ module holder_slot()
     // Connector clearance
     move([34,33,0]) {
         ycyl(h=8,d=13.5);
+        move([0,-6,0]) ycyl(h=4.5,d2=14, d1=5.75);
         //move([0,-10,0]) ycyl(h=20,d=4.75);
     }
 
     move([-34,33,0]) {
         ycyl(h=8,d=13.5);
+        move([0,-6,0]) ycyl(h=4.5,d2=14, d1=5.75);
         //move([0,-10,0]) ycyl(h=20,d=4.75);
     }
+
+
+    // // Connector clearance
+    //     move([34,33 + 2,0]) ycyl(h=14,d=12.75);
+    //     move([34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
+
+    //     move([-34,33 + 2.99,0]) ycyl(h=14,d=12.75);
+    //     move([-34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
 
     // Left
     hull() {
