@@ -195,11 +195,11 @@ module spool_holder_connectors(toPrint)
                 move([0,-6,0]) ycyl(h=4,d2=13, d1=5.25);
             }
             move([0,-5.99,0]) ycyl(h=4,d2=13 - 3, d1=5.25 - 2.5);
-            move([0,-9,0]) ycyl(h=11,d=4.25);
+            move([0,-8,0]) ycyl(h=11,d=4.25);
+            move([0,-14,0]) ycyl(h=2,d2=4.25, d1=2.5);
             move([0,-10,0]) ycyl(h=14,d=2.5);
         }
     }
-
 
     // Left
     move([-34,33,0]) {
@@ -222,7 +222,8 @@ module spool_holder_connectors(toPrint)
                 move([0,-6,0]) ycyl(h=4,d2=13, d1=5.25);
             }
             move([0,-5.99,0]) ycyl(h=4,d2=13 - 3, d1=5.25 - 2.5);
-            move([0,-9,0]) ycyl(h=11,d=4.25);
+            move([0,-8,0]) ycyl(h=11,d=4.25);
+            move([0,-14,0]) ycyl(h=2,d2=4.25, d1=2.5);
             move([0,-10,0]) ycyl(h=14,d=2.5);
         }
     }
