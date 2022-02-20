@@ -29,9 +29,9 @@ use <BOSL/shapes.scad>
 module clip()
 {
     move([0,-43.5,315]) {
-        move([0,0,-2.5]) cuboid([6,2,15], chamfer=0.5);
-        move([0,1,2]) cuboid([6,4,2], chamfer=0.5);
-        move([0,-0.5,3])cuboid([6,1,10], chamfer=0.5);
+        move([0,0,-2.5]) cuboid([8,2,15], chamfer=0.5);
+        move([0,1,2]) cuboid([8,4,2], chamfer=0.5);
+        move([0,-0.5,5])cuboid([8,1,10], chamfer=0.5);
     }
 }
 
@@ -43,17 +43,20 @@ module spool_holder_clip()
     move([-16,0,0]) clip();
     move([-32,0,0]) clip();
 
-    move([0,-43.5,306]) cuboid([80,2,10], chamfer=0.5);
+    move([0,-43.5,306]) cuboid([80,2,8], chamfer=0.5);
 
     // Mounting pegs
-    move([30,-41.5,306]) ycyl(h=2,d=3);
-    move([30,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
+    move([ 24,-41.5,306]) ycyl(h=2,d=3);
+    move([ 24,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
 
-    move([0,-41.5,306]) ycyl(h=2,d=3);
-    move([0,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
+    move([ 8,-41.5,306]) ycyl(h=2,d=3);
+    move([ 8,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
 
-    move([-30,-41.5,306]) ycyl(h=2,d=3);
-    move([-30,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
+    move([-8,-41.5,306]) ycyl(h=2,d=3);
+    move([-8,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
+
+    move([-24,-41.5,306]) ycyl(h=2,d=3);
+    move([-24,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
 }
 
 module render_spool_holder_clip(crend, toPrint)
@@ -61,6 +64,6 @@ module render_spool_holder_clip(crend, toPrint)
     if (toPrint) {
         xrot(90) move([0,44.5,-306])  spool_holder_clip();
     } else {
-        spool_holder_clip();
+        move([0,0,0]) spool_holder_clip();
     }
 }

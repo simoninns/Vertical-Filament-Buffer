@@ -95,9 +95,10 @@ module body_top()
 
         // Clip mounting peg recesses
         move([-44.5 + 3,26,0]) {
-            move([0,0,30]) xcyl(h=4,d=3);
-            xcyl(h=4,d=3);
-            move([0,0,-30]) xcyl(h=4,d=3);
+            move([0,0,24]) xcyl(h=4,d=3);
+            move([0,0,8]) xcyl(h=4,d=3);
+            move([0,0,-8]) xcyl(h=4,d=3);
+            move([0,0,-24]) xcyl(h=4,d=3);
         }
     } 
 }
