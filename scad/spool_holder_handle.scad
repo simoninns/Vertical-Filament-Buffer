@@ -33,9 +33,9 @@ module spool_holder_handle()
             union() {
                 move([0,2,0]) {
                     hull() {
-                        move([0,-1,0])cuboid([42.5,4,2.5], chamfer=0.5);
-                        move([0,1,-0.25]) cyl(h=2,d1=19.5, d2=20);
-                        move([0,1,0.25]) cyl(h=2,d1=20, d2=19.5);
+                        move([0,-1,0])cuboid([43.5,4,3.5], chamfer=0.5);
+                        move([0,1,-0.25]) cyl(h=3.5,d1=19.5, d2=20);
+                        move([0,1,0.25]) cyl(h=3.5,d1=20, d2=19.5);
                     }
                 }
             }
@@ -44,8 +44,8 @@ module spool_holder_handle()
         }
 
         // Mounts
-        move([-20,-1.5,0]) cuboid([2.5,3,2.5], chamfer=0.5);
-        move([+20,-1.5,0]) cuboid([2.5,3,2.5], chamfer=0.5);
+        move([-20,-1.5,0]) cuboid([3.5,3,3.5], chamfer=0.5);
+        move([+20,-1.5,0]) cuboid([3.5,3,3.5], chamfer=0.5);
     }
 }
 

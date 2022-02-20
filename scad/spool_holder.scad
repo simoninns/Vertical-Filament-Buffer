@@ -34,16 +34,16 @@ module spool_holder_base()
         difference() {
             union() {
                 difference() {
-                    cuboid([70 + 4,74,1]);
+                    move([0,0,-0.25]) cuboid([70 + 4,74,1.5]);
                     
                     // Cut hexagon pattern
                     move([-2,-2,0]) for (ypos=[0: 20: 20*3]) {
                         for (xpos=[0: 12: 12*5]) {
-                            move([xpos - 28,ypos - 28,0]) zrot(90) cyl(h=2, d=12, $fn=6);
+                            move([xpos - 28,ypos - 28,0]) zrot(90) cyl(h=3, d=12, $fn=6);
                         }
 
                         for (xpos=[0: 12: 12*6]) {
-                            move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=2, d=12, $fn=6);
+                            move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=3, d=12, $fn=6);
                         }
                     }
                 }
@@ -77,16 +77,16 @@ module spool_holder_top()
         difference() {
             union() {
                 difference() {
-                    cuboid([70 + 4,74,1]);
+                    move([0,0,0.25]) cuboid([70 + 4,74,1.5]);
 
                     // Cut hexagon pattern
                     move([-2,-2,0]) for (ypos=[0: 20: 20*3]) {
                         for (xpos=[0: 12: 12*5]) {
-                            move([xpos - 28,ypos - 28,0]) zrot(90) cyl(h=2, d=12, $fn=6);
+                            move([xpos - 28,ypos - 28,0]) zrot(90) cyl(h=3, d=12, $fn=6);
                         }
 
                         for (xpos=[0: 12: 12*6]) {
-                            move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=2, d=12, $fn=6);
+                            move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=3, d=12, $fn=6);
                         }
                     }
                 }
@@ -120,12 +120,12 @@ module spool_holder_sides()
         union() {
             // Left
             move([(72/2 + 0.5),0,0]) {
-                cuboid([1,70,10]);
+                cuboid([1,70,11]);
             }
 
             // Right
             move([(-72/2 +-0.5),0,0]) {
-                cuboid([1,70,10]);
+                cuboid([1,70,11]);
             }
 
             // Top
@@ -133,8 +133,9 @@ module spool_holder_sides()
                 difference() {
                     cuboid([83,1,15.75], chamfer=1, edges=EDGES_Y_ALL);
 
-                    move([-20,0,0]) cuboid([2.6,3,2.6], chamfer=0.5);
-                    move([+20,0,0]) cuboid([2.6,3,2.6], chamfer=0.5);
+                    // Handle recesses
+                    move([-20,0,0]) cuboid([3.6,3,3.6], chamfer=0.5);
+                    move([+20,0,0]) cuboid([3.6,3,3.6], chamfer=0.5);
                 }
             }
 
@@ -226,29 +227,29 @@ module render_spool_holder(crend, toPrint)
             spool_holder(toPrint);
         }
     } else {
-        move([0,-1,32]) {
-            spool_holder(toPrint);
-            spool_holder_hardware();
-        }
+        // move([0,-1,32]) {
+        //     spool_holder(toPrint);
+        //     spool_holder_hardware();
+        // }
 
-        move([0,-1,16]) {
-            spool_holder(toPrint);
-            spool_holder_hardware();
-        }
+        // move([0,-1,16]) {
+        //     spool_holder(toPrint);
+        //     spool_holder_hardware();
+        // }
 
         move([0,-1,0]) {
             spool_holder(toPrint);
             spool_holder_hardware();
         }
 
-        move([0,-1,-16]) {
-            spool_holder(toPrint);
-            spool_holder_hardware();
-        }
+        // move([0,-1,-16]) {
+        //     spool_holder(toPrint);
+        //     spool_holder_hardware();
+        // }
 
-        move([0,-1,-32]) {
-            spool_holder(toPrint);
-            spool_holder_hardware();
-        }
+        // move([0,-1,-32]) {
+        //     spool_holder(toPrint);
+        //     spool_holder_hardware();
+        // }
     }
 }
