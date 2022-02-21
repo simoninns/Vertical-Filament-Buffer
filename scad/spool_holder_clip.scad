@@ -31,9 +31,9 @@ include <body_middle.scad>
 module clip()
 {
     move([0,-43.5,315]) {
-        move([0,0,-2.5]) cuboid([8,2,15], chamfer=0.5);
-        move([0,1,2]) cuboid([8,4,2], chamfer=0.5);
-        move([0,-0.5,5])cuboid([8,1,10], chamfer=0.5);
+        move([0,0,-2.5]) cuboid([8,2,15], chamfer=0.5); // Body
+        move([0,2,2]) cuboid([8,5,2], chamfer=0.5); // Tab
+        move([0,-0.5,5])cuboid([8,1,10], chamfer=0.5); // Additional height for easier operation
     }
 }
 
@@ -45,7 +45,7 @@ module spool_holder_clip()
     move([-16,0,0]) clip();
     move([-32,0,0]) clip();
 
-    move([0,-43.5,306]) cuboid([76,2,8], chamfer=0.5);
+    move([0,-43.5,306.25]) cuboid([76,2,7.5], chamfer=0.5);
 
     // Mounting clip
     move([0,-42,303]) zrot(180) body_clip();

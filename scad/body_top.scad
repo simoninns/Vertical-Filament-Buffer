@@ -113,7 +113,7 @@ module body_top()
             }
         }
 
-        move([-43.74,27,0]) cuboid([2.5,10,76], chamfer=0.5);
+        move([-43.74,26.75,0]) cuboid([2.5,10,76], chamfer=0.5);
     }
 }
 
