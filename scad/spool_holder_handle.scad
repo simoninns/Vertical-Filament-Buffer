@@ -45,8 +45,22 @@ module spool_holder_handle()
         }
 
         // Mounts
-        move([-20,-1.5,0]) cuboid([3.5,3,3.5], chamfer=0.5);
-        move([+20,-1.5,0]) cuboid([3.5,3,3.5], chamfer=0.5);
+        move([-20,-1.5,0]) {
+            difference() {
+                cuboid([3.5,3,3.5], chamfer=0.5);
+                move([0,0,0]) cuboid([0.75,4,4]);
+            }
+        }
+
+        move([+20,-1.5,0]) {
+            difference() {
+                cuboid([3.5,3,3.5], chamfer=0.5);
+                move([0,0,0]) cuboid([0.75,4,4]);
+            }
+        }
+
+        move([-18.75,-2.25,0]) cuboid([2,1.5,3.5], chamfer=0.5);
+        move([+18.75,-2.25,0]) cuboid([2,1.5,3.5], chamfer=0.5);
     }
 }
 
