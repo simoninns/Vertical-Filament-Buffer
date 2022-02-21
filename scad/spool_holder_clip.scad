@@ -39,12 +39,20 @@ module clip()
 
 module spool_holder_clip()
 {
-    move([+32,0,0]) clip();
-    move([+16,0,0]) clip();
-    move([0,0,0]) clip();
-    move([-16,0,0]) clip();
-    move([-32,0,0]) clip();
+    difference() {
+        union() {
+            move([+32,0,0]) clip();
+            move([+16,0,0]) clip();
+            move([0,0,0]) clip();
+            move([-16,0,0]) clip();
+            move([-32,0,0]) clip();
+        }
 
+        // Chamfer to allow easy holder insertion
+        move([0,-39,318]) xrot(60) cuboid([76,2,4]);
+    }
+
+    // Support body
     move([0,-43.5,306.25]) cuboid([76,2,7.5], chamfer=0.5);
 
     // Mounting clip
