@@ -32,35 +32,55 @@ module spool_holder_handle()
         difference() {
             union() {
                 move([0,2,0]) {
+                    move([0,-1,0]) cuboid([43.5,4,3.5], chamfer=0.5);
                     hull() {
-                        move([0,-1,0]) cuboid([43.5,4,3.5], chamfer=0.5);
+                        // Center point
+                        move([0, 10,-1.5]) cyl(h=0.5,d1=19.5, d2=20, $fn=60);
+                        move([0, 10,1.5]) cyl(h=0.5,d1=20, d2=19.5, $fn=60);
 
-                        move([0, 1,-1.5]) cyl(h=0.5,d1=19.5, d2=20, $fn=60);
-                        move([0, 1,1.5]) cyl(h=0.5,d1=20, d2=19.5, $fn=60);
+                        // Side points
+                        move([19, 2,-1.5]) cyl(h=0.5,d1=5.5, d2=6, $fn=60);
+                        move([19, 2,1.5]) cyl(h=0.5,d1=6, d2=5.5, $fn=60);
+
+                        move([-19, 2,-1.5]) cyl(h=0.5,d1=5.5, d2=6, $fn=60);
+                        move([-19, 2,1.5]) cyl(h=0.5,d1=6, d2=5.5, $fn=60);
                     }
                 }
             }
 
+            // Tidy base
             move([0,-5.5,0]) cuboid([70,10,20]);
+
+            // Hold hole
+            move([0, 11.5,-1.5]) zrot(90) cyl(h=10,d=15, $fn=6);
+
+            move([+11.5, 7.75,-1.5]) zrot(90) cyl(h=10,d=6, $fn=6);
+            move([-11.5, 7.75,-1.5]) zrot(90) cyl(h=10,d=6, $fn=6);
         }
 
         // Mounts
         move([-20,-1.5,0]) {
             difference() {
-                cuboid([3.5,3,3.5], chamfer=0.5);
-                move([0,0,0]) cuboid([0.75,4,4]);
+                union() {
+                    cuboid([3.5,3,3.5], chamfer=0.5);
+                    move([-18.75 + 20,-2.25 + 1.5,0]) cuboid([2,1.5,3.5], chamfer=0.5);
+                }
+                move([0.25,0,0]) cuboid([0.75,4,4]);
             }
         }
 
         move([+20,-1.5,0]) {
             difference() {
-                cuboid([3.5,3,3.5], chamfer=0.5);
-                move([0,0,0]) cuboid([0.75,4,4]);
+                union() {
+                    cuboid([3.5,3,3.5], chamfer=0.5);
+                    move([+18.75 - 20,-2.25 + 1.5,0]) cuboid([2,1.5,3.5], chamfer=0.5);
+                }
+                move([-0.25,0,0]) cuboid([0.75,4,4]);
             }
         }
 
-        move([-18.75,-2.25,0]) cuboid([2,1.5,3.5], chamfer=0.5);
-        move([+18.75,-2.25,0]) cuboid([2,1.5,3.5], chamfer=0.5);
+        
+        
     }
 }
 
