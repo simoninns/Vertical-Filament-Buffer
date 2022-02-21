@@ -34,39 +34,29 @@ module holder_slot()
     move([34,33,0]) {
         ycyl(h=8,d=13.5);
         move([0,-6,0]) ycyl(h=4.5,d2=14, d1=5.75);
-        //move([0,-10,0]) ycyl(h=20,d=4.75);
     }
 
     move([-34,33,0]) {
         ycyl(h=8,d=13.5);
         move([0,-6,0]) ycyl(h=4.5,d2=14, d1=5.75);
-        //move([0,-10,0]) ycyl(h=20,d=4.75);
     }
-
-
-    // // Connector clearance
-    //     move([34,33 + 2,0]) ycyl(h=14,d=12.75);
-    //     move([34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
-
-    //     move([-34,33 + 2.99,0]) ycyl(h=14,d=12.75);
-    //     move([-34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
 
     // Left
     hull() {
-        move([(72/2 + 0.5),3,0]) {
+        move([(72/2 + 1),3,0]) {
             cuboid([1,72,12]);
         }
 
         // Right
-        move([(-72/2 +-0.5),3,0]) {
+        move([(-72/2 - 1),3,0]) {
             cuboid([1,72,12]);
         }
     }
 
-    // // Spindle supports
+    // Spindle support cut-out
     move([0,0,0]) cuboid([20,74.25,15]);
 
-    // Guides
+    // Holder Guides
 
     // Left
     move([(72/2 + 1.5),24,0]) {
