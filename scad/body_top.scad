@@ -93,14 +93,28 @@ module body_top()
             move([0,-42,0]) zrot(180) scale(1.01) body_clip();
         }
 
-        // Clip mounting peg recesses
-        move([-44.5 + 3,26,0]) {
-            move([0,0,24]) xcyl(h=4,d=3);
-            move([0,0,8]) xcyl(h=4,d=3);
-            move([0,0,-8]) xcyl(h=4,d=3);
-            move([0,0,-24]) xcyl(h=4,d=3);
+        // Clip mounting recess
+        move([-44.5 + 2.5,23,0]) {
+            yrot(90) xrot(-90) scale(1.01) body_clip();
         }
-    } 
+    }
+
+    // Add side holders for the spool holder clip part
+    difference() {
+        union() {
+            move([0,0,37]) hull() {
+                move([-44,26,0]) cuboid([4,8,4], chamfer=0.5);
+                move([-42.5,20.75,0]) cuboid([1,3,4], chamfer=0.5);
+            }
+
+            move([0,0,-37]) hull() {
+                move([-44,26,0]) cuboid([4,8,4], chamfer=0.5);
+                move([-42.5,20.75,0]) cuboid([1,3,4], chamfer=0.5);
+            }
+        }
+
+        move([-43.74,27,0]) cuboid([2.5,10,76], chamfer=0.5);
+    }
 }
 
 module render_body_top(crend, toPrint)

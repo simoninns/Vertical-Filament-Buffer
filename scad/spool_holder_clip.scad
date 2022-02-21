@@ -26,6 +26,8 @@ include <BOSL/constants.scad>
 use <BOSL/transforms.scad>
 use <BOSL/shapes.scad>
 
+include <body_middle.scad>
+
 module clip()
 {
     move([0,-43.5,315]) {
@@ -43,20 +45,10 @@ module spool_holder_clip()
     move([-16,0,0]) clip();
     move([-32,0,0]) clip();
 
-    move([0,-43.5,306]) cuboid([80,2,8], chamfer=0.5);
+    move([0,-43.5,306]) cuboid([76,2,8], chamfer=0.5);
 
-    // Mounting pegs
-    move([ 24,-41.5,306]) ycyl(h=2,d=3);
-    move([ 24,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
-
-    move([ 8,-41.5,306]) ycyl(h=2,d=3);
-    move([ 8,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
-
-    move([-8,-41.5,306]) ycyl(h=2,d=3);
-    move([-8,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
-
-    move([-24,-41.5,306]) ycyl(h=2,d=3);
-    move([-24,-40.25,306]) ycyl(h=0.5,d1=3, d2=1);
+    // Mounting clip
+    move([0,-42,303]) zrot(180) body_clip();
 }
 
 module render_spool_holder_clip(crend, toPrint)
