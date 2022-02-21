@@ -39,12 +39,14 @@ module spool_holder_base()
                         
                         // Cut hexagon pattern
                         move([-2,-2,0]) for (ypos=[0: 20: 20*3]) {
+                            
                             for (xpos=[0: 12: 12*5]) {
                                 move([xpos - 28,ypos - 28,0]) zrot(90) cyl(h=3, d=12, $fn=6);
                             }
-
+                            
+                            
                             for (xpos=[0: 12: 12*6]) {
-                                move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=3, d=12, $fn=6);
+                                if (ypos != 0) move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=3, d=12, $fn=6);
                             }
                         }
                     }
@@ -62,7 +64,7 @@ module spool_holder_base()
         }
         
         // Connector clearance
-        move([34,33 + 2,0]) ycyl(h=14,d=12.75);
+        move([34,33 + 2.99,0]) ycyl(h=14,d=12.75);
         move([34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
 
         move([-34,33 + 2.99,0]) ycyl(h=14,d=12.75);
@@ -93,7 +95,7 @@ module spool_holder_top()
                             }
 
                             for (xpos=[0: 12: 12*6]) {
-                                move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=3, d=12, $fn=6);
+                                if (ypos != 0) move([xpos - 28 - 6,ypos - 28 - 10,0]) zrot(90) cyl(h=3, d=12, $fn=6);
                             }
                         }
                     }
@@ -111,7 +113,7 @@ module spool_holder_top()
         }
             
         // Connector clearance
-        move([34,33 + 2,0]) ycyl(h=14,d=12.75);
+        move([34,33 + 2.99,0]) ycyl(h=14,d=12.75);
         move([34,33-6,0]) ycyl(h=4,d2=13, d1=5.25);
 
         move([-34,33 + 2.99,0]) ycyl(h=14,d=12.75);
@@ -130,13 +132,13 @@ module spool_holder_sides()
     difference() {
         union() {
             // Left
-            move([(72/2 + 0.5),0,0]) {
-                cuboid([1,70,11]);
+            move([(72/2 + 0.5),-1,0]) {
+                cuboid([1,72,11]);
             }
 
             // Right
-            move([(-72/2 +-0.5),0,0]) {
-                cuboid([1,70,11]);
+            move([(-72/2 +-0.5),-1,0]) {
+                cuboid([1,72,11]);
             }
 
             // Top
