@@ -38,12 +38,6 @@ module render_bearing_holder(crend, toPrint)
 {
     if (toPrint) {
         move([0,0,5]) bearing_holder();
-
-        // Brim
-        difference() {
-            cyl(h=0.2, d=15, center=false);
-            cyl(h=1, d=4.8, center=true);
-        }
     } else {
         bearing_holder();
     }
