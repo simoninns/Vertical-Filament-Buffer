@@ -118,6 +118,11 @@ module body_middle()
             move([0,-42,0]) zrot(180) body_clip();
         }
     }
+}
+
+module body_middle_upper()
+{
+    body_middle();
 
     // Bracket mounts
     move([45.5,39.5,57]) {
@@ -147,12 +152,25 @@ module body_middle()
     }
 }
 
-module render_body_middle(crend, toPrint)
+module body_middle_lower()
+{
+    body_middle();
+}
+
+module render_body_middle_upper(crend, toPrint)
 {
     if (!toPrint) {
-        move([0,0,225]) body_middle();
-        move([0,0,82+3]) body_middle();
+        move([0,0,225]) body_middle_upper();
     } else {
-        move([0,0,70]) body_middle();
+        move([0,0,70]) body_middle_upper();
+    }
+}
+
+module render_body_middle_lower(crend, toPrint)
+{
+    if (!toPrint) {
+        move([0,0,82+3]) body_middle_lower();
+    } else {
+        move([0,0,70]) body_middle_lower();
     }
 }

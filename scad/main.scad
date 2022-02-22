@@ -39,9 +39,7 @@ include <body_base.scad>
 include <mounting_bracket.scad>
 include <spool_holder_clip.scad>
 
-// include <hinge.scad>
 // include <t-nut.scad>
-// include <desiccant_container.scad>
 
 // Rendering resolution
 $fn=30;
@@ -61,7 +59,8 @@ display_connectors = "No"; // [Yes, No]
 
 // Body parameters
 display_body_top = "No"; // [Yes, No]
-display_body_middle = "No"; // [Yes, No]
+display_body_middle_upper = "No"; // [Yes, No]
+display_body_middle_lower = "No"; // [Yes, No]
 display_body_base = "No"; // [Yes, No]
 
 // Mounting parameters
@@ -85,7 +84,8 @@ module main()
     d_connectors = (display_connectors == "Yes") ? true:false;
 
     d_body_top = (display_body_top == "Yes") ? true:false;
-    d_body_middle = (display_body_middle == "Yes") ? true:false;
+    d_body_middle_upper = (display_body_middle_upper == "Yes") ? true:false;
+    d_body_middle_lower = (display_body_middle_lower == "Yes") ? true:false;
     d_body_base = (display_body_base == "Yes") ? true:false;
 
     d_upper_mounting_bracket = (display_upper_mounting_bracket == "Yes") ? true:false;
@@ -111,7 +111,8 @@ module main()
     move([0,0,body]) xrot(bodr) yrot(bodr) {
         if (d_body_top) render_body_top(crend, toPrint);
     }
-    if (d_body_middle) render_body_middle(crend, toPrint);
+    if (d_body_middle_upper) render_body_middle_upper(crend, toPrint);
+    if (d_body_middle_lower) render_body_middle_lower(crend, toPrint);
     if (d_body_base) render_body_base(crend, toPrint);
 
     // Bracket rendering
