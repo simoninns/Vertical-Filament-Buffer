@@ -27,14 +27,18 @@ use <BOSL/transforms.scad>
 use <BOSL/shapes.scad>
 
 // Local includes
+include <bearing.scad>
+include <spool.scad>
+include <connectors.scad>
+include <spool_holder.scad>
+include <spool_holder_handle.scad>
+include <bearing_holder.scad>
 include <body_top.scad>
 include <body_middle.scad>
 include <body_base.scad>
-include <hinge.scad>
-include <spools.scad>
 include <mounting_bracket.scad>
+include <spool_holder_clip.scad>
 include <t-nut.scad>
-include <desiccant_container.scad>
 
 // Rendering resolution
 $fn=30;
@@ -42,72 +46,77 @@ $fn=30;
 // Select rendering parameters
 use_colour = "Colour"; // [Colour, No colour]
 for_printing = "Display"; // [Display, Printing]
-feed_configuration = "Above"; // [Above, Below]
 
-display_body_top = "Yes"; // [Yes, No]
-display_body_middle = "Yes"; // [Yes, No]
-display_body_base = "Yes"; // [Yes, No]
-display_desiccant_compartment_lid = "Yes"; // [Yes, No]
+// Spool and holder parameters
+display_spool_holder = "No"; // [Yes, No]
+display_spool_holder_handle = "No"; // [Yes, No]
+display_spool_holder_clip = "No"; // [Yes, No]
+display_spool = "No"; // [Yes, No]
+display_bearing_holder = "No"; // [Yes, No]
+display_bearing = "No"; // [Yes, No]
+display_connectors = "No"; // [Yes, No]
 
-display_hinge = "Yes"; // [Yes, No]
-display_hinge_caps = "Yes"; // [Yes, No]
+// Body parameters
+display_body_top = "No"; // [Yes, No]
+display_body_middle_upper = "No"; // [Yes, No]
+display_body_middle_lower = "No"; // [Yes, No]
+display_body_base = "No"; // [Yes, No]
 
-display_mounting_bracket_upper = "Yes"; // [Yes, No]
-display_mounting_bracket_lower = "Yes"; // [Yes, No]
-display_t_nuts = "Yes"; // [Yes, No]
-
-display_spools = "Yes"; // [Yes, No]
-display_bearings = "Yes"; // [Yes, No]
-display_connectors = "Yes"; // [Yes, No]
-
-display_desiccant_holder = "Yes"; // [Yes, No]
-display_desiccant_holder_lid = "Yes"; // [Yes, No]
+// Mounting parameters
+display_upper_mounting_bracket = "No"; // [Yes, No]
+display_t_nut = "No"; // [Yes, No]
 
 // Render the required items
 module main()
 {
+    // Main options
     crend = (use_colour == "Colour") ? true:false;
     toPrint = (for_printing == "Printing") ? true:false;
 
-    isFeedAbove = (feed_configuration == "Above") ? true:false;
-
-    d_body_top = (display_body_top == "Yes") ? true:false;
-    d_body_middle = (display_body_middle == "Yes") ? true:false;
-    d_body_base = (display_body_base == "Yes") ? true:false;
-    d_desiccant_compartment_lid = (display_desiccant_compartment_lid == "Yes") ? true:false;
-
-    d_hinge = (display_hinge == "Yes") ? true:false;
-    d_hinge_caps = (display_hinge_caps == "Yes") ? true:false;
-
-    d_mounting_bracket_upper = (display_mounting_bracket_upper == "Yes") ? true:false;
-    d_mounting_bracket_lower = (display_mounting_bracket_lower == "Yes") ? true:false;
-    d_t_nuts = (display_t_nuts == "Yes") ? true:false;
-
-    d_spools = (display_spools == "Yes") ? true:false;
-    d_bearings = (display_bearings == "Yes") ? true:false;
+    // Display selections
+    d_spool_holder = (display_spool_holder == "Yes") ? true:false;
+    d_spool_holder_handle = (display_spool_holder_handle == "Yes") ? true:false;
+    d_spool_holder_clip = (display_spool_holder_clip == "Yes") ? true:false;
+    d_spool = (display_spool == "Yes") ? true:false;
+    d_bearing_holder = (display_bearing_holder == "Yes") ? true:false;
+    d_bearing = (display_bearing == "Yes") ? true:false;
     d_connectors = (display_connectors == "Yes") ? true:false;
 
-    d_desiccant_holder = (display_desiccant_holder == "Yes") ? true:false;
-    d_desiccant_holder_lid = (display_desiccant_holder_lid == "Yes") ? true:false;
+    d_body_top = (display_body_top == "Yes") ? true:false;
+    d_body_middle_upper = (display_body_middle_upper == "Yes") ? true:false;
+    d_body_middle_lower = (display_body_middle_lower == "Yes") ? true:false;
+    d_body_base = (display_body_base == "Yes") ? true:false;
 
-    if (d_body_top) render_body_top(crend, toPrint);
-    if (d_body_middle) render_body_middle(crend, toPrint);
+    d_upper_mounting_bracket = (display_upper_mounting_bracket == "Yes") ? true:false;
+    d_t_nut = (display_t_nut == "Yes") ? true:false;
+
+    // Spool and spool holder rendering:
+    spolr = (toPrint) ? 0 : 90;
+    spoly = (toPrint) ? 0 : 280;
+    move([0,0,spoly]) xrot(spolr) yrot(spolr) {
+        if (d_spool_holder) render_spool_holder(crend, toPrint);
+        if (d_spool_holder_handle) render_spool_holder_handle(crend, toPrint);
+        if (d_spool) render_spool(crend, toPrint);
+        if (d_bearing_holder) render_bearing_holder(crend, toPrint);
+        if (d_bearing) render_bearing(crend, toPrint);
+        if (d_connectors) render_connectors(crend, toPrint);
+    }
+
+    if (d_spool_holder_clip) render_spool_holder_clip(crend, toPrint);
+
+    // Body rendering
+    bodr = (toPrint) ? 0 : 90;
+    body = (toPrint) ? 0 : 280;
+    move([0,0,body]) xrot(bodr) yrot(bodr) {
+        if (d_body_top) render_body_top(crend, toPrint);
+    }
+    if (d_body_middle_upper) render_body_middle_upper(crend, toPrint);
+    if (d_body_middle_lower) render_body_middle_lower(crend, toPrint);
     if (d_body_base) render_body_base(crend, toPrint);
-    if (d_desiccant_compartment_lid) render_desiccant_compartment_lid(crend, toPrint);
 
-    if (d_hinge) render_hinge(crend, toPrint);
-    if (d_hinge_caps) render_hinge_caps(crend, toPrint);
-
-    if (d_mounting_bracket_upper) render_mounting_bracket_upper(crend, toPrint);
-    if (d_mounting_bracket_lower) render_mounting_bracket_lower(crend, toPrint);
-    if (d_t_nuts) render_tnuts(crend, toPrint);
-
-    if (d_spools) render_spools(crend, toPrint);
-    if (d_bearings) render_bearings(crend, toPrint);
-    if (d_connectors) render_ptfe_connectors(crend, toPrint, isFeedAbove);
-
-    if (d_desiccant_holder) render_desiccant_holder(crend, toPrint);
-    if (d_desiccant_holder_lid) render_desiccant_holder_lid(crend, toPrint);
+    // Bracket rendering
+    if (d_upper_mounting_bracket) render_upper_mounting_bracket(crend, toPrint);
+    if (d_t_nut) render_t_nut(crend, toPrint);
 }
 
 main();

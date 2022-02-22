@@ -26,76 +26,36 @@ include <BOSL/constants.scad>
 use <BOSL/transforms.scad>
 use <BOSL/shapes.scad>
 
-module middle_mounts()
-{
-    difference() {
-        move([40.5,35,14 + (7.5/2)]) cuboid([14,5,53 + 7.5], chamfer=1, edges=EDGES_Y_ALL+EDGES_Z_ALL);
+include <body_clips.scad>
 
-        // Screw holes
-        move([42.5,41.5,242 - 248]) ycyl(h=40, d=3.25);
-        move([42.5,41.5,282 - 248]) ycyl(h=40, d=3.25);
-    }
+module acrylic_sheet1()
+{
+    cuboid([81,1,140]);
 }
 
-module middle_dividing_wall()
+module acrylic_sheet2()
 {
-    difference() {
-        cuboid([1.2,74,96]);
-
-        difference() {
-            union() {
-                move([0,0,-43]) {
-                    for(raise=[0: 18 * 2: 96]) {
-                        move([0,0,raise]) {
-                            hex_row();
-                            move([0,10,18]) hex_row();
-                        }
-                    }
-                }
-            }
-
-            difference() {
-                cuboid([6,75 + 80,96 + 40]);
-                move([-1,0,0]) cuboid([4,75 - 7,96 - 7]);
-            }
-        }
-    }
+    cuboid([1,81,140]);
 }
 
-module body_middle_hinge()
+module acrylic_sheet3()
 {
     difference() {
-        union() {
-            hull(){
-                move([(75-51),46 + 2,-34]) xcyl(h=12,d=14);
-                move([(75-51),46 + 2 - 11,-34 - 18 + 8]) cuboid([12,4,30], chamfer = 2);
-            }
-            move([(75-51),46 + 2 - 1,-34 + 4]) cuboid([12,16,8]);
-
-            hull() {
-                move([-(75-51),46 + 2,-34]) xcyl(h=12,d=14);
-                move([-(75-51),46 + 2 - 11,-34 - 18 + 8]) cuboid([12,4,30], chamfer = 2);
-            }
-            move([-(75-51),46 + 2 - 1,-34 + 4]) cuboid([12,16,8]);
-        }
-
-        move([0,46 + 2,-34]) xcyl(h=80, d=8); // Hole for shaft
-        move([0,46 + 5,-34 + 10.5]) xrot(41) cuboid([80,4,24]); // Chamfer
+        cuboid([1,81,140]);
+        cuboid([2,81 - 4,140 - 4]);
     }
-}
 
-module render_middle_screws()
-{
-    move([0,0,248]) {
-        move([0,0,-46]) {
-            zrot(45) {
-                move([-58,0,3.5]) zrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
-                move([+58,0,3.5]) zrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
+    difference() {
+        cuboid([1,81,140]);
+
+        // Cut hexagon pattern
+        move([0,-8,-27]) for (ypos=[0: 20: 20*6]) {
+            for (xpos=[0: 12: 12*7]) {
+                move([0,xpos - 28,ypos - 28]) yrot(90) cyl(h=4, d=12, $fn=6);
             }
 
-            zrot(-45) {
-                move([-58,0,3.5]) zrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
-                move([+58,0,3.5]) zrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
+            for (xpos=[0: 12: 12*7]) {
+                move([0,xpos - 28 - 6,ypos - 28 - 10]) yrot(90) cyl(h=4, d=12, $fn=6);
             }
         }
     }
@@ -103,101 +63,101 @@ module render_middle_screws()
 
 module body_middle()
 {
-    wt=1.2; // 0.3 * 4 and 0.4 * 3
-    move([0,0,248]) {
+    // Perpendicular to spool
+    move([0,41,0]) acrylic_sheet1();
+    move([0,-41,0]) acrylic_sheet1();
+
+    // Parallel with spool
+    move([(-8) * 5,0,0]) acrylic_sheet2();
+    move([(+8) * 5,0,0]) acrylic_sheet2();
+
+    // Spool dividers
+    move([(-8) * 3,0,0]) acrylic_sheet3();
+    move([-8,0,0]) acrylic_sheet3();
+    move([+8,0,0]) acrylic_sheet3();
+    move([(+8) * 3,0,0]) acrylic_sheet3();
+
+    // Top Joiner 72.5
+    move([0,0,-68]) {
         difference() {
-            union() {
-                cuboid([75,75,96], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
+            cuboid([84 - 1, 86 - 1,4]);
+            cuboid([84-3,86 - 3,6]);
 
-                // Mounts
-                middle_mounts();
-
-                // Hinge
-                move([0,0,322 - 248]) body_middle_hinge();
-
-                // Catch for clip
-                move([0,-36,37]) cuboid([40,8,8], chamfer=3);
-
-                // Upper lip
-                move([0,0,45]) cuboid([75 + 4.8,75 + 4.8, 6], chamfer=2.25 + 0.125, edges=EDGE_BOT_FR+EDGE_BOT_BK+EDGE_BOT_LF+EDGE_BOT_RT+EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT, trimcorners=false);
-
-                // Lower lip
-                move([0,0,-45]) cuboid([75 + 4.8,75 + 4.8, 6], chamfer=2.25 + 0.125, edges=EDGE_TOP_FR+EDGE_TOP_BK+EDGE_TOP_LF+EDGE_TOP_RT+EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT, trimcorners=false);
-
-                // Add joiners
-                move([0,0,-46]) {
-                    zrot(45) {
-                        difference() {
-                            hull() {
-                                cuboid([125,10,4], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-                                move([0,0,15]) cuboid([100,10,4], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-                            }
-
-                            // Screw holes
-                            move([-58,0,0]) cyl(h=25, d=3.25);
-                            move([+58,0,0]) cyl(h=25, d=3.25);
-
-                            // Screw heads
-                            move([-58,0,8]) cyl(h=10, d=6);
-                            move([+58,0,8]) cyl(h=10, d=6);
-                        }
-                    }
-
-                    zrot(-45) {
-                        difference() {
-                            hull() {
-                                cuboid([125,10,4], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-                                move([0,0,15]) cuboid([100,10,4], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-                            }
-
-                            // Screw holes
-                            move([-58,0,0]) cyl(h=25, d=3.25);
-                            move([+58,0,0]) cyl(h=25, d=3.25);
-
-                            // Screw heads
-                            move([-58,0,8]) cyl(h=10, d=6);
-                            move([+58,0,8]) cyl(h=10, d=6);
-                        }
-                    }
-                }
+            // Clip recesses
+            move([0,0,-3.5]) {
+                move([0,42,0]) body_clip_inverse();
+                move([0,-42,0]) zrot(180) body_clip_inverse();
             }
-            cuboid([75 - (wt * 2),75 - (wt * 2),96 + 4], chamfer=1.5, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-
-            // Seal recess
-            move([0,0,51 - 2]) {
-                difference() {
-                    cuboid([75 + 2.6,75 + 2.6, 6], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-                    cuboid([75 - 0.4,75 - 0.4, 8], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-                }
-            }
-        } 
+        }
     }
 
-    // Add buffer dividers
-    move([0,0,248]) {
-        move([- 14 - 7.75,0,0]) middle_dividing_wall();
-        move([- 7.25,0,0]) middle_dividing_wall();
-        move([+ 7.25,0,0]) middle_dividing_wall();
-        move([+ 14 + 7.75,0,0]) middle_dividing_wall();
-    }
-
-    // Seal lip
-    move([0,0,203 - 1]) {
+    // Base Joiner
+    move([0,0,67 + 3]) {
         difference() {
-            cuboid([75 + 2.4,75 + 2.4, 6], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-            cuboid([75 - 0.6,75 - 0.6, 8], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
+            cuboid([84 + 2,86 + 2,8], chamfer=2.5, edges=EDGES_BOTTOM);
+            move([0,0,0]) cuboid([84-3,86-3,10]);
+            move([0,0,5.01]) cuboid([84 - 1,86 - 1,10]);
+        }
+
+        // Clips
+        move([0,0,-1.5]) {
+            move([0,42,0]) body_clip();
+            move([0,-42,0]) zrot(180) body_clip();
         }
     }
 }
 
-module render_body_middle(crend, toPrint)
+module body_middle_upper()
+{
+    body_middle();
+
+    // Bracket mounts
+    move([45.5,39.5,57]) {
+        difference() {
+            hull() {
+                move([0,0,0]) cuboid([10,4,10], chamfer=0.5, edges=EDGES_X_ALL+EDGE_TOP_RT+EDGE_BK_RT+EDGE_FR_RT);
+                move([-5.5,0,-10]) cuboid([1,4,10], chamfer=0.5, edges=EDGES_X_ALL+EDGE_TOP_RT+EDGE_BK_RT+EDGE_FR_RT);
+            }
+
+            // Nut recess
+            move([0,1,0]) ycyl(h=8, d=3.25);
+            move([0,1,0]) yrot(90) ycyl(h=4, d=6.25, $fn=6);
+        }
+    }
+
+    move([45.5,39.5,17]) {
+        difference() {
+            hull() {
+                move([0,0,0]) cuboid([10,4,10], chamfer=0.5, edges=EDGES_X_ALL+EDGE_TOP_RT+EDGE_BK_RT+EDGE_FR_RT);
+                move([-5.5,0,-10]) cuboid([1,4,10], chamfer=0.5, edges=EDGES_X_ALL+EDGE_TOP_RT+EDGE_BK_RT+EDGE_FR_RT);
+            }
+
+            // Nut recess
+            move([0,1,0]) ycyl(h=8, d=3.25);
+            move([0,1,0]) yrot(90) ycyl(h=4, d=6.25, $fn=6);
+        }
+    }
+}
+
+module body_middle_lower()
+{
+    body_middle();
+}
+
+module render_body_middle_upper(crend, toPrint)
 {
     if (!toPrint) {
-        if (crend) color([0.2,0.2,0.2]) body_middle();
-        else body_middle();
-
-        color([0.7,0.7,0.7]) render_middle_screws();
+        move([0,0,225]) body_middle_upper();
     } else {
-        move([0,0,296]) xrot(180) body_middle();
+        move([0,0,70]) body_middle_upper();
+    }
+}
+
+module render_body_middle_lower(crend, toPrint)
+{
+    if (!toPrint) {
+        move([0,0,82+3]) body_middle_lower();
+    } else {
+        move([0,0,70]) body_middle_lower();
     }
 }

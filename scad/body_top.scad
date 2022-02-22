@@ -26,111 +26,97 @@ include <BOSL/constants.scad>
 use <BOSL/transforms.scad>
 use <BOSL/shapes.scad>
 
-include <ptfe_connectors.scad>
-include <spools.scad>
+include <body_clips.scad>
 
-module connectors_inverse(toPrint)
+module holder_slot()
 {
-    // Top connectors
-    move([-1,-(62/2),20.5]) contact_mount_inverse(toPrint);
-    move([-1,+(62/2),20.5]) contact_mount_inverse(toPrint);
-
-    // Bottom connectors
-    move([1,-(62/2) - 15,-16.5]) xrot(90 + 45) contact_mount_inverse(toPrint);
-}
-
-module bearing_mount()
-{
-    hull() {
-        move([3.5,0,-15]) xcyl(h=1, d=6);
-        move([7,0,-15]) xcyl(h=1, d=18);
+    // Connector clearance
+    move([34,33,0]) {
+        ycyl(h=8,d=13.5);
+        move([0,-6,0]) ycyl(h=4.5,d2=14, d1=5.75);
     }
 
-    hull() {
-        move([-3.5,0,-15]) xcyl(h=1, d=6);
-        move([-7,0,-15]) xcyl(h=1, d=18);
+    move([-34,33,0]) {
+        ycyl(h=8,d=13.5);
+        move([0,-6,0]) ycyl(h=4.5,d2=14, d1=5.75);
     }
-}
 
-module bearing_mounts()
-{
-    bearing_mount();
-
-    move([-29,0,0]) bearing_mount();
-    move([-14.5,0,0]) bearing_mount();
-    bearing_mount();
-    move([+14.5,0,0]) bearing_mount();
-    move([+29,0,0]) bearing_mount();
-}
-
-module main_body_top(toPrint)
-{
-    move([0,0,322]) {
-        difference() {
-            union() {
-                cuboid([75,75,52], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT+EDGES_TOP);
-                body_top_clip();
-                body_top_hinge();
-
-                // Lower lip
-                move([0,0,-23]) cuboid([75 + 4.8,75 + 4.8, 6], chamfer=2.25 + 0.125, edges=EDGE_TOP_FR+EDGE_TOP_BK+EDGE_TOP_LF+EDGE_TOP_RT+EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT, trimcorners=false);
-                
-                hull() {
-                    move([0,-23.5,6.25]) xrot(45) move([0,-35.5,0]) cuboid([75,4,20], chamfer=2);
-                    move([0,-45 + 9.5,-16 + 10]) cuboid([75,4,40], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-                }
-
-                // Fillers to prevent overhangs
-                move([37,36,-21]) rotate([45,45,45]) cuboid([4.75,4,2]);
-                move([-37,36,-21]) rotate([45,-45,-45]) cuboid([4.75,4,2]);
-            }
-
-            move([0,0,-322]) render_spools_inverse();
-            connectors_inverse(toPrint);
+    // Left
+    hull() {
+        move([(72/2 + 1),3,0]) {
+            cuboid([1,72,12]);
         }
 
-        // Seal lip
-        move([0,0,-23 - 1]) {
-            difference() {
-                cuboid([75 + 2.4,75 + 2.4, 6], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-                cuboid([75 - 0.6,75 - 0.6, 8], chamfer=2, edges=EDGE_FR_LF+EDGE_FR_RT+EDGE_BK_LF+EDGE_BK_RT);
-            }
+        // Right
+        move([(-72/2 - 1),3,0]) {
+            cuboid([1,72,12]);
         }
+    }
 
-        bearing_mounts();
+    // Spindle support cut-out
+    move([0,0,0]) cuboid([20,74.25,15]);
+
+    // Holder Guides
+
+    // Left
+    move([(72/2 + 1.5),24,0]) {
+        cuboid([3.5,20,3.5], chamfer=1);
+    }
+
+    // Right
+    move([(-72/2 - 1.5),24,0]) {
+        cuboid([3.5,20,3.5], chamfer=1);
     }
 }
 
-module body_top_hinge()
+module body_top()
 {
+    // Top slots for spool holders
+    difference() {
+        move([0,25,0]) cuboid([85,20,83], chamfer=1, edges=EDGES_BACK);
+
+        // Slots
+        move([0,-1,0]) {
+            move([0,0,+32]) holder_slot();
+            move([0,0,+16]) holder_slot();
+            move([0,0,  0]) holder_slot();
+            move([0,0,-16]) holder_slot();
+            move([0,0,-32]) holder_slot();
+        }
+
+        // Remove more material
+        move([0,26,0]) cuboid([80 - 10,40,76 - 10], chamfer=1);
+
+        // Clip recesses
+        move([0,13.5,0]) yrot(90) xrot(-90) {
+            move([0,42,0]) body_clip_inverse();
+            move([0,-42,0]) zrot(180) body_clip_inverse();
+        }
+
+        // Clip mounting recess
+        move([0,23,0]) yrot(90) xrot(-90) {
+            move([0, 42,0]) body_clip_inverse();
+        }
+    }
+
+    // Add side holders for the spool holder clip part
     difference() {
         hull() {
-            move([0,46 + 2,-34]) xcyl(h=75 - 40,d=14);
-            move([0,46 + 2 - 11,-34 + 18]) cuboid([75-40,4,14], chamfer = 2);
+            move([-44,26,0]) cuboid([4,8,79], chamfer=0.5);
+            move([-42.5,20.75,0]) cuboid([1,3,76], chamfer=0.5);
         }
-        move([0,46 + 2,-34]) xcyl(h=75 - 30 + 4, d=8);
 
-        move([0,37,-36]) cuboid([75 - 40 + 4,6,20]); 
+        // Create a slot for the clips
+        move([-43,26.75,0]) cuboid([3,10,76], chamfer=0.5);
+        move([-45,30,0]) cuboid([4,10,70], chamfer=0.5);
     }
-}
-
-module body_top_clip()
-{
-    move([0,-41.5,-35]) cuboid([40,3,22], chamfer=1);
-    move([0,-41.5 + 1.5,-36 - 6]) cuboid([38,4,4]);
-
-    move([0,-41.5 + 1.5,-38]) right_triangle([38, 4, 4], center=true, orient=ORIENT_X);
-
-    move([0,-42.5,-46]) cuboid([40,3,10], chamfer=1);
-    move([0,-42.5,-26.25]) cuboid([40,3,3], chamfer=1);
 }
 
 module render_body_top(crend, toPrint)
 {   
-    if (!toPrint) {
-        if (crend) color([1,0.65,0]) main_body_top(toPrint);
-        else main_body_top(toPrint);
+    if (toPrint) {
+        xrot(90) move([0,-15,0]) body_top();
     } else {
-        move([0,0,348]) xrot(180) main_body_top(toPrint);
+        body_top();
     }
 }
