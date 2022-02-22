@@ -26,7 +26,7 @@ include <BOSL/constants.scad>
 use <BOSL/transforms.scad>
 use <BOSL/shapes.scad>
 
-include <body_middle.scad>
+include <body_clips.scad>
 
 module holder_slot()
 {

@@ -74,11 +74,10 @@ module tnuts()
     move([76,65.5 + 2,9]) xrot(90) tnut();
 }
 
-module render_tnuts(crend, toPrint)
+module render_t_nut(crend, toPrint)
 { 
     if (!toPrint) {
-        if (crend) color([1,0.65,0]) tnuts();
-        else tnuts();
+        tnuts();
     } else {
         tnut();
     }

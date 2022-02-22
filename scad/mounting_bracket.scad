@@ -26,22 +26,6 @@ include <BOSL/constants.scad>
 use <BOSL/transforms.scad>
 use <BOSL/shapes.scad>
 
-module render_mounting_screws_lower()
-{
-    // move([68 + 8,54 + 1.5,9]) xrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
-    // move([45 + 8,54 + 1.5,9]) xrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
-
-    // move([42.5,32.5,30]) xrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
-    // move([42.5,32.5,52]) xrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
-
-    // // Nuts
-    // move([42.5,46 - 2,30]) xrot(90) metric_nut(size=3, hole=true);
-    // move([42.5,46 - 2,52]) xrot(90) metric_nut(size=3, hole=true);
-
-    // move([68 + 8,54 + 13.25,9]) xrot(90) metric_nut(size=3, hole=true);
-    // move([45 + 8,54 + 13.25,9]) xrot(90) metric_nut(size=3, hole=true);
-}
-
 module render_mounting_screws_upper()
 {
     move([0,5,0]) {
@@ -110,55 +94,10 @@ module mounting_bracket_upper()
 module render_upper_mounting_bracket(crend, toPrint)
 {
     if (!toPrint) {
-        if (crend) color([1,0.65,0]) mounting_bracket_upper();
-        else mounting_bracket_upper();
+        mounting_bracket_upper();
 
         color([0.7,0.7,0.7]) render_mounting_screws_upper();
     } else {
         xrot(-90) move([-90,-32.5,-262]) mounting_bracket_upper();
     }
-}
-
-module mounting_bracket_lower()
-{
-    // // Frame mount
-    // difference() {
-    //     move([60,58 - 2.5,9]) cuboid([45,10,18], chamfer=1);
-    //     move([68 + 8,54 + 1.5,9]) ycyl(h=20, d=3);
-    //     move([45 + 8,54 + 1.5,9]) ycyl(h=20, d=3);
-
-    //     // Screw recess
-    //     move([68 + 8,52,9]) ycyl(h=8, d=6);
-    //     move([45 + 8,52,9]) ycyl(h=8, d=6);
-    // }
-
-    // // Arm
-    // move([42.5,50,9]) cuboid([10,20,18], chamfer=1);
-    
-    // difference() {
-    //     move([42.5,41.5,30.25]) cuboid([10,8,53 + 7.5], chamfer=1);
-
-    //     // Screw holes
-    //     move([42.5,41.5,30]) ycyl(h=40, d=3.25);
-    //     move([42.5,41.5,52]) ycyl(h=40, d=3.25);
-
-    //     // Nut recess
-    //     move([42.5,46,30]) xrot(90) metric_nut(size=3, hole=true);
-    //     move([42.5,46 - 2,30]) xrot(90) metric_nut(size=3, hole=true);
-
-    //     move([42.5,46,52]) xrot(90) metric_nut(size=3, hole=true);
-    //     move([42.5,46 - 2,52]) xrot(90) metric_nut(size=3, hole=true);
-    // }
-}
-
-module render_lower_mounting_bracket(crend, toPrint)
-{
-    // if (!toPrint) {
-    //     if (crend) color([1,0.65,0]) mounting_bracket_lower();
-    //     else mounting_bracket_lower();
-
-    //     color([0.7,0.7,0.7]) render_mounting_screws_lower();
-    // } else {
-    //     move([-60,-58,0]) mounting_bracket_lower();
-    // }
 }

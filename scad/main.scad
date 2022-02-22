@@ -38,8 +38,7 @@ include <body_middle.scad>
 include <body_base.scad>
 include <mounting_bracket.scad>
 include <spool_holder_clip.scad>
-
-// include <t-nut.scad>
+include <t-nut.scad>
 
 // Rendering resolution
 $fn=30;
@@ -65,7 +64,7 @@ display_body_base = "No"; // [Yes, No]
 
 // Mounting parameters
 display_upper_mounting_bracket = "No"; // [Yes, No]
-display_lower_mounting_bracket = "No"; // [Yes, No]
+display_t_nut = "No"; // [Yes, No]
 
 // Render the required items
 module main()
@@ -89,7 +88,7 @@ module main()
     d_body_base = (display_body_base == "Yes") ? true:false;
 
     d_upper_mounting_bracket = (display_upper_mounting_bracket == "Yes") ? true:false;
-    d_lower_mounting_bracket = (display_lower_mounting_bracket == "Yes") ? true:false;
+    d_t_nut = (display_t_nut == "Yes") ? true:false;
 
     // Spool and spool holder rendering:
     spolr = (toPrint) ? 0 : 90;
@@ -117,7 +116,7 @@ module main()
 
     // Bracket rendering
     if (d_upper_mounting_bracket) render_upper_mounting_bracket(crend, toPrint);
-    if (d_lower_mounting_bracket) render_lower_mounting_bracket(crend, toPrint);
+    if (d_t_nut) render_t_nut(crend, toPrint);
 }
 
 main();
