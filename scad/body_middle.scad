@@ -65,6 +65,15 @@ module body_clip()
     move([20,0.5,3.25]) zrot(90) yrot(180) right_triangle([1, 40, 1]);
 }
 
+module body_clip_inverse()
+{
+    scale(1.001) {
+        move([20,0.5,3.75]) zrot(90) yrot(270) right_triangle([1, 40, 1]);
+        move([0,0,3.5]) cuboid([40,1,1], chamfer=0.25, edges=EDGES_Y_TOP+EDGE_TOP_FR+EDGE_BOT_FR);
+        move([20,0.5,3.25]) zrot(90) yrot(180) right_triangle([1, 40, 1]);
+    }
+}
+
 module body_middle()
 {
     // Perpendicular to spool
@@ -89,8 +98,8 @@ module body_middle()
 
             // Clip recesses
             move([0,0,-3.5]) {
-                move([0,42,0]) scale(1.01) body_clip();
-                move([0,-42,0]) zrot(180) scale(1.01) body_clip();
+                move([0,42,0]) body_clip_inverse();
+                move([0,-42,0]) zrot(180) body_clip_inverse();
             }
         }
     }

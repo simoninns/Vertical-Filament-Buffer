@@ -89,31 +89,26 @@ module body_top()
 
         // Clip recesses
         move([0,13.5,0]) yrot(90) xrot(-90) {
-            move([0,42,0]) scale(1.01) body_clip();
-            move([0,-42,0]) zrot(180) scale(1.01) body_clip();
+            move([0,42,0]) body_clip_inverse();
+            move([0,-42,0]) zrot(180) body_clip_inverse();
         }
 
         // Clip mounting recess
-        move([-44.5 + 2.5,23,0]) {
-            yrot(90) xrot(-90) scale(1.01) body_clip();
+        move([0,23,0]) yrot(90) xrot(-90) {
+            move([0, 42,0]) body_clip_inverse();
         }
     }
 
     // Add side holders for the spool holder clip part
     difference() {
-        union() {
-            move([0,0,37]) hull() {
-                move([-44,26,0]) cuboid([4,8,4], chamfer=0.5);
-                move([-42.5,20.75,0]) cuboid([1,3,4], chamfer=0.5);
-            }
-
-            move([0,0,-37]) hull() {
-                move([-44,26,0]) cuboid([4,8,4], chamfer=0.5);
-                move([-42.5,20.75,0]) cuboid([1,3,4], chamfer=0.5);
-            }
+        hull() {
+            move([-44,26,0]) cuboid([4,8,79], chamfer=0.5);
+            move([-42.5,20.75,0]) cuboid([1,3,76], chamfer=0.5);
         }
 
-        move([-43.74,26.75,0]) cuboid([2.5,10,76], chamfer=0.5);
+        // Create a slot for the clips
+        move([-43,26.75,0]) cuboid([3,10,76], chamfer=0.5);
+        move([-45,30,0]) cuboid([4,10,70], chamfer=0.5);
     }
 }
 
