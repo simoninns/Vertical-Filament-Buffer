@@ -64,7 +64,7 @@ module tnut()
         cyl(h=18,d=3.25, center=true);
 
         // Nut recess
-        move([0,0,0.5]) cyl(h=4,d=6, center=true, $fn=6);
+        move([0,0,0.5]) cyl(h=4,d=7, center=true, $fn=6);
     }
 }
 
