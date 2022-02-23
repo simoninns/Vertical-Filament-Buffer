@@ -33,15 +33,15 @@ module body_base_bracket()
     // Frame mount
     difference() {
         union() {
-            move([58,58 - 2.5,9]) cuboid([50,10,18], chamfer=2);
-            move([36.5,49,9]) cuboid([10,23,18], chamfer=2);
+            move([58,58 - 2.5,9 - 5]) cuboid([50,10,28], chamfer=2);
+            move([36.5,49,9 - 5]) cuboid([10,23,28], chamfer=2);
         }
-        move([68 + 8,54 + 1.5,9]) ycyl(h=20, d=3.5);
-        move([45 + 8,54 + 1.5,9]) ycyl(h=20, d=3.5);
+        move([68 + 5,54 + 1.5,9]) ycyl(h=20, d=3.5);
+        move([45 + 5,54 + 1.5,9]) ycyl(h=20, d=3.5);
 
         // Screw recess
-        move([68 + 8,52,9]) ycyl(h=8, d=6);
-        move([45 + 8,52,9]) ycyl(h=8, d=6);
+        move([68 + 5,52,9]) ycyl(h=8, d=6);
+        move([45 + 5,52,9]) ycyl(h=8, d=6);
     }
 }
 
@@ -56,7 +56,7 @@ module body_base()
             }
             move([0,0,0]) cuboid([84-3,86-3,10]);
             move([0,0,5.01]) cuboid([84 - 1,86 - 1,10]);
-            move([0,0,6.5 + 1 - 15]) cuboid([83 - 2,85 - 2,15], chamfer=2, edges=EDGES_BOTTOM);
+            move([0,0,1.5 + 1 - 15]) cuboid([83 - 2,85 - 2,25], chamfer=2, edges=EDGES_BOTTOM);
         }
 
         // Clips
@@ -68,20 +68,20 @@ module body_base()
 
     // Box
     difference() {
-        move([0,0,6.5]) cuboid([83,85,13], chamfer=2, edges=EDGES_BOTTOM);
-        move([0,0,6.5 + 2]) cuboid([83 - 2,85 - 2,15], chamfer=2, edges=EDGES_BOTTOM);
+        move([0,0,1.5]) cuboid([83,85,23], chamfer=2, edges=EDGES_BOTTOM);
+        move([0,0,1.5 + 2]) cuboid([83 - 2,85 - 2,23], chamfer=2, edges=EDGES_BOTTOM);
     }
 }
 
 module mounting_screws_lower()
 {
     // Screws
-    move([68 + 8,54 + 1.5,9]) xrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
-    move([45 + 8,54 + 1.5,9]) xrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
+    move([68 + 5,54 + 1.5,9]) xrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
+    move([45 + 5,54 + 1.5,9]) xrot(90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
 
     // Nuts
-    move([68 + 8,54 + 13.25,9]) xrot(90) metric_nut(size=3, hole=true);
-    move([45 + 8,54 + 13.25,9]) xrot(90) metric_nut(size=3, hole=true);
+    move([68 + 5,54 + 13.25,9]) xrot(90) metric_nut(size=3, hole=true);
+    move([45 + 5,54 + 13.25,9]) xrot(90) metric_nut(size=3, hole=true);
 }
 
 module render_body_base(crend, toPrint)

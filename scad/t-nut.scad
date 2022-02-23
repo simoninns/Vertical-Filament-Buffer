@@ -70,8 +70,8 @@ module tnut()
 
 module tnuts()
 {
-    move([53,65.5 + 2,9]) xrot(90) tnut();
-    move([76,65.5 + 2,9]) xrot(90) tnut();
+    move([50,65.5 + 2,9]) xrot(90) tnut();
+    move([73,65.5 + 2,9]) xrot(90) tnut();
 }
 
 module render_t_nut(crend, toPrint)
