@@ -36,8 +36,8 @@ module body_base_bracket()
             move([58,58 - 2.5,9]) cuboid([50,10,18], chamfer=2);
             move([36.5,49,9]) cuboid([10,23,18], chamfer=2);
         }
-        move([68 + 8,54 + 1.5,9]) ycyl(h=20, d=3);
-        move([45 + 8,54 + 1.5,9]) ycyl(h=20, d=3);
+        move([68 + 8,54 + 1.5,9]) ycyl(h=20, d=3.5);
+        move([45 + 8,54 + 1.5,9]) ycyl(h=20, d=3.5);
 
         // Screw recess
         move([68 + 8,52,9]) ycyl(h=8, d=6);
