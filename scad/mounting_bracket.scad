@@ -29,9 +29,11 @@ use <BOSL/shapes.scad>
 module render_mounting_screws_upper()
 {
     move([0,5,0]) {
-        move([134.5,26 + 1.5,283]) yrot(-90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
-        move([134.5,26 + 1.5,240]) yrot(-90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
-
+        move([4,0,0]) {
+            move([134.5,26 + 1.5,283]) yrot(-90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
+            move([134.5,26 + 1.5,240]) yrot(-90) metric_bolt(headtype="socket", size=3, l=12, details=false, phillips="#2", pitch=0);
+        }
+        
         move([45.5,27.5,242]) xrot(90) metric_bolt(headtype="socket", size=3, l=10, details=false, phillips="#2", pitch=0);
         move([45.5,27.5,282]) xrot(90) metric_bolt(headtype="socket", size=3, l=10, details=false, phillips="#2", pitch=0);
 
@@ -45,7 +47,7 @@ module mounting_bracket_upper()
 {
     move([0,5,0]) {
         // Frame mount
-        difference() {
+        move([4,0,0]) difference() {
             union() {
                 move([137.25,27.5,262]) cuboid([8,10,53], chamfer=1);
 
@@ -65,15 +67,15 @@ module mounting_bracket_upper()
 
         // Arm
         difference() {
-            move([90,28.5,262]) cuboid([98,8,53/2], chamfer=1);
+            move([91,28.5,262]) cuboid([98,8,53/2], chamfer=1);
 
             // Cut-outs
-            move([87 + 24,28.5,262]) cuboid([(98/2) - 12,16,(53/2) - 12], chamfer=0);
-            move([87 - 18,28.5,262]) cuboid([(98/2) - 12,16,(53/2) - 12], chamfer=0);
+            move([90 + 24,28.5,262]) cuboid([(98/2) - 12,16,(53/2) - 12], chamfer=0);
+            move([90 - 18,28.5,262]) cuboid([(98/2) - 12,16,(53/2) - 12], chamfer=0);
 
             // Decoration
-            move([87 + 24,28.5 - 7,262]) cuboid([(98/2) - 10,8,(53/2) - 10], chamfer=1);
-            move([87 - 18,28.5 - 7,262]) cuboid([(98/2) - 10,8,(53/2) - 10], chamfer=1);
+            move([90 + 24,28.5 - 7,262]) cuboid([(98/2) - 10,8,(53/2) - 10], chamfer=1);
+            move([90 - 18,28.5 - 7,262]) cuboid([(98/2) - 10,8,(53/2) - 10], chamfer=1);
         }
 
         // Buffer mount
