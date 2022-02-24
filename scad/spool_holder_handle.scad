@@ -89,12 +89,22 @@ module render_spool_holder_handle(crend, toPrint)
     if (toPrint) {
         move([0,-40,1.75]) spool_holder_handle();
     } else {
-        move([0,-1,0]) {
-            move([0,0,+32]) spool_holder_handle();
-            move([0,0,+16]) spool_holder_handle();
-            move([0,0,  0]) spool_holder_handle();
-            move([0,0,-16]) spool_holder_handle();
-            move([0,0,-32]) spool_holder_handle();
+        if (crend) {
+            color([1,0.65,0]) move([0,-1,0]) {
+                move([0,0,+32]) spool_holder_handle();
+                move([0,0,+16]) spool_holder_handle();
+                move([0,0,  0]) spool_holder_handle();
+                move([0,0,-16]) spool_holder_handle();
+                move([0,0,-32]) spool_holder_handle();
+            }
+        } else {
+            move([0,-1,0]) {
+                move([0,0,+32]) spool_holder_handle();
+                move([0,0,+16]) spool_holder_handle();
+                move([0,0,  0]) spool_holder_handle();
+                move([0,0,-16]) spool_holder_handle();
+                move([0,0,-32]) spool_holder_handle();
+            }
         }
     }
 }

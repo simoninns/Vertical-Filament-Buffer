@@ -147,7 +147,8 @@ module body_middle_lower()
 module render_body_middle_upper(crend, toPrint)
 {
     if (!toPrint) {
-        move([0,0,225]) body_middle_upper();
+        if (crend) color([0.2,0.2,0.2]) move([0,0,225]) body_middle_upper();
+        else move([0,0,225]) body_middle_upper();
     } else {
         move([0,0,70]) body_middle_upper();
     }
@@ -156,7 +157,8 @@ module render_body_middle_upper(crend, toPrint)
 module render_body_middle_lower(crend, toPrint)
 {
     if (!toPrint) {
-        move([0,0,82+3]) body_middle_lower();
+        if (crend) color([0.2,0.2,0.2]) move([0,0,82+3]) body_middle_lower();
+        else move([0,0,82+3]) body_middle_lower();
     } else {
         move([0,0,70]) body_middle_lower();
     }

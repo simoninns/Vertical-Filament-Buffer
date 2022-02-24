@@ -64,6 +64,10 @@ module render_spool_holder_clip(crend, toPrint)
     if (toPrint) {
         xrot(90) move([0,44.5,-306])  spool_holder_clip();
     } else {
-        move([0,0,0]) spool_holder_clip();
+        if (crend) {
+            color([1,0.65,0]) spool_holder_clip();
+        } else {
+            spool_holder_clip();
+        }
     }
 }

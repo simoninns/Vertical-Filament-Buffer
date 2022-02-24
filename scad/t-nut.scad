@@ -77,7 +77,8 @@ module tnuts()
 module render_t_nut(crend, toPrint)
 { 
     if (!toPrint) {
-        tnuts();
+        if (crend) color([1,0.65,0]) tnuts();
+        else tnuts();
     } else {
         tnut();
     }

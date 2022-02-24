@@ -96,8 +96,8 @@ module mounting_bracket_upper()
 module render_upper_mounting_bracket(crend, toPrint)
 {
     if (!toPrint) {
-        mounting_bracket_upper();
-
+        if (crend) color([1,0.65,0]) mounting_bracket_upper();
+        else mounting_bracket_upper();
         color([0.7,0.7,0.7]) render_mounting_screws_upper();
     } else {
         xrot(-90) move([-90,-32.5,-262]) mounting_bracket_upper();

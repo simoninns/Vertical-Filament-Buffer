@@ -117,6 +117,10 @@ module render_body_top(crend, toPrint)
     if (toPrint) {
         xrot(90) move([0,-15,0]) body_top();
     } else {
-        body_top();
+        if (crend) {
+            color([1,0.65,0]) body_top();
+        } else {
+            body_top();
+        }
     }
 }

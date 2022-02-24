@@ -252,27 +252,32 @@ module render_spool_holder(crend, toPrint)
         }
     } else {
         move([0,-1,32]) {
-            spool_holder(toPrint);
+            if (crend) color([0.2,0.2,0.2]) spool_holder(toPrint);
+            else spool_holder(toPrint);
             spool_holder_hardware();
         }
 
         move([0,-1,16]) {
-            spool_holder(toPrint);
+            if (crend) color([0.2,0.2,0.2]) spool_holder(toPrint);
+            else spool_holder(toPrint);
             spool_holder_hardware();
         }
 
         move([0,-1,0]) {
-            spool_holder(toPrint);
+            if (crend) color([0.2,0.2,0.2]) spool_holder(toPrint);
+            else spool_holder(toPrint);
             spool_holder_hardware();
         }
 
         move([0,-1,-16]) {
-            spool_holder(toPrint);
+            if (crend) color([0.2,0.2,0.2]) spool_holder(toPrint);
+            else spool_holder(toPrint);
             spool_holder_hardware();
         }
 
         move([0,-1,-32]) {
-            spool_holder(toPrint);
+            if (crend) color([0.2,0.2,0.2]) spool_holder(toPrint);
+            else spool_holder(toPrint);
             spool_holder_hardware();
         }
     }

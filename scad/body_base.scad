@@ -87,7 +87,8 @@ module mounting_screws_lower()
 module render_body_base(crend, toPrint)
 {
     if (!toPrint) {
-        body_base();
+        if (crend) color([1,0.65,0]) body_base();
+        else body_base();
         mounting_screws_lower();
     } else {
         body_base();

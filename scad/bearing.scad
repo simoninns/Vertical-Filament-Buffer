@@ -74,11 +74,11 @@ module render_bearing(crend, toPrint)
 {
     if (!toPrint) {
         move([0,0,0.5]) {
-            move([0,0,+30]) bearing605zz();
-            move([0,0,+15]) bearing605zz();
+            move([0,0,+32]) bearing605zz();
+            move([0,0,+16]) bearing605zz();
             move([0,0,  0]) bearing605zz();
-            move([0,0,-15]) bearing605zz();
-            move([0,0,-30]) bearing605zz();
+            move([0,0,-16]) bearing605zz();
+            move([0,0,-32]) bearing605zz();
         }
     }
 }

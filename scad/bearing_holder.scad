@@ -39,6 +39,22 @@ module render_bearing_holder(crend, toPrint)
     if (toPrint) {
         move([0,0,5]) bearing_holder();
     } else {
-        bearing_holder();
+        if (crend) {
+            color([0.2,0.2,0.2]) move([0,0,0.5]) {
+                move([0,0,+32]) bearing_holder();
+                move([0,0,+16]) bearing_holder();
+                move([0,0,  0]) bearing_holder();
+                move([0,0,-16]) bearing_holder();
+                move([0,0,-32]) bearing_holder();
+            }
+        } else {
+            move([0,0,0.5]) {
+                move([0,0,+32]) bearing_holder();
+                move([0,0,+16]) bearing_holder();
+                move([0,0,  0]) bearing_holder();
+                move([0,0,-16]) bearing_holder();
+                move([0,0,-32]) bearing_holder();
+            }
+        }
     }
 }
