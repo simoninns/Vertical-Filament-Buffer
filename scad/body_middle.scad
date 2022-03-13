@@ -40,25 +40,29 @@ module acrylic_sheet2()
 
 module acrylic_sheet3()
 {
-    difference() {
-        cuboid([1,81,140]);
-        cuboid([2,81 - 4,140 - 4]);
-    }
+    cuboid([1.5,81,140]);
 
-    difference() {
-        cuboid([1,81,140]);
+    // Original hexagon pattern interior
+    // - causes friction against the filament motion
+    // difference() {
+    //     cuboid([1,81,140]);
+    //     cuboid([2,81 - 4,140 - 4]);
+    // }
 
-        // Cut hexagon pattern
-        move([0,-8,-27]) for (ypos=[0: 20: 20*6]) {
-            for (xpos=[0: 12: 12*7]) {
-                move([0,xpos - 28,ypos - 28]) yrot(90) cyl(h=4, d=12, $fn=6);
-            }
+    // difference() {
+    //     cuboid([1,81,140]);
 
-            for (xpos=[0: 12: 12*7]) {
-                move([0,xpos - 28 - 6,ypos - 28 - 10]) yrot(90) cyl(h=4, d=12, $fn=6);
-            }
-        }
-    }
+    //     // Cut hexagon pattern
+    //     move([0,-8,-27]) for (ypos=[0: 20: 20*6]) {
+    //         for (xpos=[0: 12: 12*7]) {
+    //             move([0,xpos - 28,ypos - 28]) yrot(90) cyl(h=4, d=12, $fn=6);
+    //         }
+
+    //         for (xpos=[0: 12: 12*7]) {
+    //             move([0,xpos - 28 - 6,ypos - 28 - 10]) yrot(90) cyl(h=4, d=12, $fn=6);
+    //         }
+    //     }
+    // }
 }
 
 module body_middle()
