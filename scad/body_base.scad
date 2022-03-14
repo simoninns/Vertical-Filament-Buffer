@@ -61,8 +61,8 @@ module body_base()
 
         // Clips
         move([0,0,-1.5]) {
-            move([0,42.5,0]) body_clip();
-            move([0,-42.5,0]) zrot(180) body_clip();
+            move([0,42.25,0]) body_clip();
+            move([0,-42.25,0]) zrot(180) body_clip();
         }
     }
 

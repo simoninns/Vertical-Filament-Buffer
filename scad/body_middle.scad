@@ -103,11 +103,11 @@ module body_middle()
             move([0,0,5.01]) cuboid([84 - 1,86 - 1,10]);
         }
 
-        // Clips
-        move([0,0,-1.5]) {
-            move([0,42.5,0]) body_clip();
-            move([0,-42.5,0]) zrot(180) body_clip();
-        }
+        // // Clips
+        // move([0,0,-1.5]) {
+        //     move([0,42.25,0]) body_clip();
+        //     move([0,-42.25,0]) zrot(180) body_clip();
+        // }
     }
 }
 
@@ -141,11 +141,27 @@ module body_middle_upper()
             move([0,1,0]) yrot(90) ycyl(h=4, d=6.25, $fn=6);
         }
     }
+
+    // Clips
+    move([0,0,67 + 3]) {
+        move([0,0,-1.5]) {
+            move([0,42,0]) body_clip();
+            move([0,-42,0]) zrot(180) body_clip();
+        }
+    }
 }
 
 module body_middle_lower()
 {
     body_middle();
+
+    // Clips
+    move([0,0,67 + 3]) {
+        move([0,0,-1.5]) {
+            move([0,42.25,0]) body_clip();
+            move([0,-42.25,0]) zrot(180) body_clip();
+        }
+    }
 }
 
 module render_body_middle_upper(crend, toPrint)
