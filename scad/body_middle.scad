@@ -30,39 +30,17 @@ include <body_clips.scad>
 
 module acrylic_sheet1()
 {
-    cuboid([81,1,140]);
+    cuboid([81.5,1.5,140]);
 }
 
 module acrylic_sheet2()
 {
-    cuboid([1,81,140]);
+    cuboid([1.5,81,140]);
 }
 
 module acrylic_sheet3()
 {
     cuboid([1.5,81,140]);
-
-    // Original hexagon pattern interior
-    // - causes friction against the filament motion
-    // difference() {
-    //     cuboid([1,81,140]);
-    //     cuboid([2,81 - 4,140 - 4]);
-    // }
-
-    // difference() {
-    //     cuboid([1,81,140]);
-
-    //     // Cut hexagon pattern
-    //     move([0,-8,-27]) for (ypos=[0: 20: 20*6]) {
-    //         for (xpos=[0: 12: 12*7]) {
-    //             move([0,xpos - 28,ypos - 28]) yrot(90) cyl(h=4, d=12, $fn=6);
-    //         }
-
-    //         for (xpos=[0: 12: 12*7]) {
-    //             move([0,xpos - 28 - 6,ypos - 28 - 10]) yrot(90) cyl(h=4, d=12, $fn=6);
-    //         }
-    //     }
-    // }
 }
 
 module body_middle()
@@ -102,12 +80,6 @@ module body_middle()
             move([0,0,0]) cuboid([84-3,86-3,10]);
             move([0,0,5.01]) cuboid([84 - 1,86 - 1,10]);
         }
-
-        // // Clips
-        // move([0,0,-1.5]) {
-        //     move([0,42.25,0]) body_clip();
-        //     move([0,-42.25,0]) zrot(180) body_clip();
-        // }
     }
 }
 
@@ -116,7 +88,7 @@ module body_middle_upper()
     body_middle();
 
     // Bracket mounts
-    move([45.5,39.5,57]) {
+    move([45.5,39.75,57]) {
         difference() {
             hull() {
                 move([0,0,0]) cuboid([10,4,10], chamfer=0.5, edges=EDGES_X_ALL+EDGE_TOP_RT+EDGE_BK_RT+EDGE_FR_RT);
@@ -129,7 +101,7 @@ module body_middle_upper()
         }
     }
 
-    move([45.5,39.5,17]) {
+    move([45.5,39.75,17]) {
         difference() {
             hull() {
                 move([0,0,0]) cuboid([10,4,10], chamfer=0.5, edges=EDGES_X_ALL+EDGE_TOP_RT+EDGE_BK_RT+EDGE_FR_RT);
