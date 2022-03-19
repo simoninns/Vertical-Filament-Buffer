@@ -75,7 +75,7 @@ module side_holder()
     difference() {
         hull() {
             move([0.5,26,0]) cuboid([5,8,79], chamfer=0.25);
-            move([1.5,20.75,0]) cuboid([1,3,76], chamfer=0.25);
+            move([1.75,20.75,0]) cuboid([1,3,76], chamfer=0.25);
         }
 
         // Create a slot for the clips
